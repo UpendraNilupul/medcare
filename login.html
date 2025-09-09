@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | MedCare</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .login-container {
+      max-width: 400px;
+      margin: 80px auto;
+      padding: 30px;
+      background: #ffffff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #444;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #0c8cf0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .login-btn:hover {
+      background-color: #0a76cd;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Optional: Add your header/navbar here if needed -->
+
+  <div class="login-container">
+    <h2>Login to MedCare</h2>
+    <form id="loginForm">
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter your username" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required>
+      </div>
+      <button type="submit" class="login-btn">Login</button>
+      <div class="error" id="error-message"></div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Replace with real credentials or backend later
+      const USERNAME = "admin";
+      const PASSWORD = "medcare123";
+
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      const errorDiv = document.getElementById('error-message');
+
+      if (user === USERNAME && pass === PASSWORD) {
+        alert("Login successful!");
+        window.location.href = "index.html"; // Redirect to homepage or dashboard
+      } else {
+        errorDiv.textContent = "Invalid username or password.";
+      }
+    });
+  </script>
+
+</body>
+</html>
