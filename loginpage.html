@@ -252,7 +252,26 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
+        .go-admin {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: white;
+            color: var(--green);
+            padding: 0.8rem 1.5rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
         .back-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .go-admin:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
@@ -307,8 +326,12 @@
     </style>
 </head>
 <body>
-    <a href="#" class="back-home">
+    <a href="index.html" class="back-home">
         <i class="fas fa-arrow-left"></i> Back to Home
+    </a>
+
+    <a href="adminlogin.html" class="go-admin">
+        <i class="fas fa"></i> Admin Login
     </a>
 
     <div class="login-container">
@@ -322,20 +345,11 @@
         </div>
 
         <div class="login-right">
-            <form class="login-form" id="loginForm">
+            
+            <form action="login.php" class="login-form" id="loginForm" method="POST">
                 <h3>Sign In</h3>
                 
-                <div class="user-type-selector">
-                    <div class="user-type active" data-type="patient">
-                        <i class="fas fa-user"></i>
-                        <span>Patient</span>
-                    </div>
-                    
-                    <div class="user-type" data-type="admin">
-                        <i class="fas fa-user-shield"></i>
-                        <span>Admin</span>
-                    </div>
-                </div>
+                
 
                 <div class="form-group">
                     <label for="email">Email Address</label>
@@ -358,84 +372,13 @@
 
                 <div class="divider">
                     <br><br>
-                    <span>Don't have an account? <a href="#" style="color: var(--green); text-decoration: none;">Register here</a></span>
+                    <span>Don't have an account? <a href="register.html" style="color: var(--green); text-decoration: none;">Register here</a></span>
                 </div>
             </form>
         </div>
     </div>
 
-    <script>
-        // User type selector functionality
-        const userTypes = document.querySelectorAll('.user-type');
-        let selectedUserType = 'patient';
-
-        userTypes.forEach(type => {
-            type.addEventListener('click', () => {
-                userTypes.forEach(t => t.classList.remove('active'));
-                type.classList.add('active');
-                selectedUserType = type.dataset.type;
-            });
-        });
-
-        // Form submission
-        const loginForm = document.getElementById('loginForm');
-        const loginBtn = document.querySelector('.login-btn');
-        const btnText = document.querySelector('.btn-text');
-        const loading = document.querySelector('.loading');
-
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            // Show loading state
-            btnText.textContent = 'Signing In...';
-            loading.classList.add('active');
-            loginBtn.disabled = true;
-
-            // Get form data
-            const formData = {
-                email: document.getElementById('email').value,
-                password: document.getElementById('password').value,
-                userType: selectedUserType,
-                remember: document.getElementById('remember').checked
-            };
-
-            // Simulate login process
-            setTimeout(() => {
-                console.log('Login attempt:', formData);
-                
-                // Reset button state
-                btnText.textContent = 'Sign In';
-                loading.classList.remove('active');
-                loginBtn.disabled = false;
-
-                // Show success message (in a real app, handle actual authentication)
-                alert(`Login successful as ${selectedUserType}!\nEmail: ${formData.email}`);
-                
-                // Redirect logic would go here
-                // window.location.href = 'dashboard.html';
-            }, 2000);
-        });
-
-        // Password visibility toggle (optional enhancement)
-        document.addEventListener('DOMContentLoaded', () => {
-            const passwordField = document.getElementById('password');
-            const passwordIcon = passwordField.nextElementSibling;
-            
-            // Add eye icon for password toggle
-            passwordIcon.addEventListener('click', () => {
-                if (passwordField.type === 'password') {
-                    passwordField.type = 'text';
-                    passwordIcon.classList.remove('fa-lock');
-                    passwordIcon.classList.add('fa-eye-slash');
-                } else {
-                    passwordField.type = 'password';
-                    passwordIcon.classList.remove('fa-eye-slash');
-                    passwordIcon.classList.add('fa-lock');
-                }
-            });
-            
-            passwordIcon.style.cursor = 'pointer';
-        });
-    </script>
+    
+    
 </body>
 </html>
