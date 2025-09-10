@@ -1,0 +1,205 @@
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      background: teal;
+      padding: 20px 10px;
+    }
+
+    .header .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .header .logo i {
+      margin-right: 10px;
+      color: #ffeb3b;
+      font-size: 26px;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: #004d4d;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .navbar a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #ffeb3b;
+    }
+
+    /* Banner */
+    .hero-banner {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      background: url('F:/SecondYear/SeconSem/WebTechnolagy/Project/medcare/image/online-medical-help-concept-woman-doctor-glasses-face-mask-showing-mobile-phone-screen-app.jpg') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      align-items: center;   /* vertical center */
+      justify-content: flex-start; /* move to left */
+      padding-left: 40px;    /* left spacing */
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 109, 119, 0.6);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      color: white;
+      text-align: left;
+    }
+
+    .hero-content h1 {
+      font-size: 40px;
+      font-weight: bold;
+    }
+
+    /* Contact Info + Map */
+    .contact {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    .info-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .info-box h2 {
+      color: teal;
+      margin-bottom: 15px;
+    }
+
+    .info-box p {
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    .info-box i {
+      color: teal;
+      margin-right: 8px;
+    }
+
+    .map-responsive iframe {
+      width: 100%;
+      height: 220px; /* smaller */
+      border: 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    /* Form Section */
+    .form-section {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .form-section h2 {
+      margin-bottom: 15px;
+      color: teal;
+      text-align: center;
+    }
+
+    .form-container label {
+      font-weight: bold;
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    .form-container .box {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: teal;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #006064;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background: teal;
+      color: white;
+      margin-top: 40px;
+    }
+
+    .footer .credit {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .footer i {
+      color: #ffeb3b;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+      .hero-content h1 {
+        font-size: 28px;
+      }
+    }

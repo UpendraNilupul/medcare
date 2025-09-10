@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medcare - Contact Us</title>
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      background: teal;
+      padding: 20px;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo i {
+      margin-right: 8px;
+      color: #ffeb3b;
+      font-size: 26px;
+    }
+
+    /* Navbar */
+    .nav {
+      background: #004d4d;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    .nav a:hover {
+      color: #ffeb3b;
+    }
+
+    /* Banner */
+    .banner {
+      position: relative;
+      height: 250px;
+      background: url('F:/SecondYear/SeconSem/WebTechnolagy/Project/medcare/image/online-medical-help-concept-woman-doctor-glasses-face-mask-showing-mobile-phone-screen-app.jpg') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      padding-left: 40px;
+      color: white;
+    }
+
+    .banner::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 109, 119, 0.6);
+    }
+
+    .banner h1 {
+      position: relative;
+      font-size: 36px;
+      z-index: 1;
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    .contact-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .contact-box h2 {
+      color: teal;
+      margin-bottom: 15px;
+    }
+
+    .contact-box p {
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    .contact-box i {
+      color: teal;
+      margin-right: 6px;
+    }
+
+    .map iframe {
+      width: 100%;
+      height: 220px;
+      border: 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    /* Form Section */
+    .form-box {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .form-box h2 {
+      color: teal;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .form-box label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    .form-box input,
+    .form-box textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background: teal;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .btn:hover {
+      background: #006064;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 25px 15px;
+      background: teal;
+      color: white;
+      margin-top: 40px;
+    }
+
+    .footer h2 {
+      margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffeb3b;
+    }
+
+    .footer-links {
+      margin: 10px 0;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 8px;
+      font-weight: bold;
+    }
+
+    .footer-links a:hover {
+      color: #ffeb3b;
+    }
+
+    .footer i {
+      color: #ffeb3b;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .contact {
+        grid-template-columns: 1fr;
+      }
+      .banner h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+     <h1 style="font-size: 36px; color: #96ecb3;"><i class="fas fa-heartbeat"></i> Medcare Center</h1>
+  </header>
+
+  <!-- Navbar -->
+  <nav class="nav">
+    <a href="#">Home</a>
+    <a href="#">Services</a>
+    <a href="#">About</a>
+    <a href="#">Doctors</a>
+    <a href="#">Book</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- Banner -->
+  <div class="banner">
+    <h1>Contact Us</h1>
+  </div>
+
+  <!-- Contact Info + Map -->
+  <section class="contact" id="contact">
+    <div class="contact-box">
+      <h2>Our Address</h2>
+      <p><i class="fas fa-map-marker-alt"></i> Medcare Health Center,Greenfield Road, Colombo 5, Sri Lanka</p>
+      <p><i class="fas fa-phone"></i> General Line: 0112 345 678</p>
+      <p><i class="fas fa-phone-square"></i> Appoinment Hotline: 0115 987 654</p>
+      <p><i class="fas fa-fax"></i> Fax: 0112 111 222</p>
+      <p><i class="fas fa-envelope"></i> Email: contact@medcare</p>
+    </div>
+
+    <div class="map">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126745.26204749416!2d79.981185!3d6.927078!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2595c48e9c6c7%3A0x7e86e5f1ff717a8a!2sMedcare%20Health%20Center!5e0!3m2!1sen!2slk!4v1693408893040" 
+      width="100%" 
+      height="220" 
+      style="border:0; border-radius:8px;" 
+      allowfullscreen="" 
+      loading="lazy">
+    </iframe>
+  </div>
+  </section>
+
+  <!-- Form Section -->
+  <section class="form-box">
+    <h2>Send us a Message</h2>
+    <form>
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+
+      <label for="mobile">Mobile No</label>
+      <input type="tel" id="mobile" placeholder="Enter your mobile number" required pattern="[0-9]{10}" title="Enter a 10-digit number">
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" rows="4" placeholder="Write your message" required></textarea>
+
+      <button type="submit" class="btn">Send Message <i class="fas fa-paper-plane"></i></button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <h2>Medcare Center</h2>
+    <p>&copy; Medcare Center. All rights reserved.</p>
+
+    <!-- Quick Links -->
+    <div class="footer-links">
+      <a href="#">Home</a> | 
+      <a href="#">About</a> | 
+      <a href="#">Services</a> | 
+      <a href="#contact">Contact</a>
+    </div>
+
+  </footer>
+
+</body>
+</html>
