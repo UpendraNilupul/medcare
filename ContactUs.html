@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Medcare - Contact Us</title>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="F:\SecondYear\SeconSem\WebTechnolagy\Project\medcare\ContactUs.css">
   
   
@@ -14,18 +14,27 @@
   <!-- Header -->
   <header class="header" style="display: flex; align-items: center; justify-content: center; gap: 15px;">
     <img src="F:\SecondYear\SeconSem\WebTechnolagy\Project\medcare\image\hospitalLogo.png" alt="hospital logo" width  = "60" height = "60" style="border-radius: 50%;">
-     <h1 style="font-size: 50px; color: #96ecb3;"><i class="fas fa-heartbeat"></i> Medcare Center</h1>
+     <h1 style="font-size: 50px; color: #96ecb3;">Medcare Center</h1>
   </header>
 
   <!-- Navbar -->
   <nav class="nav">
+  <div class="nav-links">
     <a href="#">Home</a>
     <a href="#">Services</a>
     <a href="#">About</a>
     <a href="#">Doctors</a>
     <a href="#">Book</a>
-    <a href="#contact">Contact</a>
-  </nav>
+    <a href="#contact">ContactUs</a>
+  </div>
+
+  <div class="nav-icons">
+    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://x.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
+  </div>
+</nav>
+
 
   <!-- Banner -->
   <div class="banner">
@@ -44,34 +53,39 @@
     </div>
   
     <div class="map">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3943.2708718605213!2d80.49744313040175!3d8.760565538288496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afc14fff58d74af%3A0x406f84b30d3639f4!2sNew%20Lanka%20Medicare!5e0!3m2!1sen!2slk!4v1757618473842!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-  </div>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3932.9444091664736!2d80.01848697544739!3d9.685785978361642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afe54125cafe551%3A0x61d1a49bcd146dfe!2sDepartment%20of%20Computer%20Science%2C%20University%20of%20Jaffna!5e0!3m2!1sen!2slk!4v1758032426479!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
   </section>
 
   <!-- Form Section -->
   <section class="form-box">
     <form action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="access_key" value="79fb3f94-b596-4f30-b066-a2ab1021ab59">
-  <label for="name">Name</label>
-  <input type="text" id="name" name="name" placeholder="Enter your name" required>
+    <h2>Contact Us</h2>
+    <input type="hidden" name="access_key" value="79fb3f94-b596-4f30-b066-a2ab1021ab59">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" placeholder="Enter your name" required>
 
-  <label for="mobile">Mobile No</label>
-  <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required pattern="[0-9]{10}">
+    <label for="mobile">Mobile No</label>
+    <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required pattern="[0-9]{10}">
 
-  <label for="email">Email</label>
-  <input type="email" id="email" name="email" placeholder="Enter your email" required>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="Enter your email" required>
 
-  <label for="message">Message</label>
-  <textarea id="message" name="message" rows="4" placeholder="Write your message" required></textarea>
+    <label for="message">Message</label>
+    <textarea id="message" name="message" rows="4" placeholder="Write your message" required></textarea>
 
-  <button type="submit" class="btn">Send Message</button>
+    <button type="submit" class="btn">Send Message</button>
 </form>
 
   </section>
 
   <!-- Footer -->
   <footer class="footer">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10;">
+      <img src="F:\SecondYear\SeconSem\WebTechnolagy\Project\medcare\image\hospitalLogo.png" alt="hospital logo" width  = "50" height = "50" style="border-radius: 50%; margin-bottom: 10px;">
     <h2>Medcare Center</h2>
+    </div>
+    
     <p>&copy; Medcare Center. All rights reserved.</p>
 
     <!-- Quick Links -->
@@ -79,7 +93,13 @@
       <a href="#">Home</a> | 
       <a href="#">About</a> | 
       <a href="#">Services</a> | 
-      <a href="#contact">Contact</a>
+     
+      <a href="https://wa.me/94714783615" class="whatsapp-float" target="_blank">
+      <i class="fab fa-whatsapp"></i>
+</a>
+
+</a>
+
     </div>
 
   </footer>

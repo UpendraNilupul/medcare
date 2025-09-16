@@ -35,21 +35,35 @@
 
     /* Navbar */
     .nav {
-      background: #004d4d;
-      text-align: center;
-      padding: 10px;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* keeps links on left, icons on right */
+    background: #004d4d;
+    padding: 10px 20px;
+  }
 
-    .nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-    }
+  .nav-links a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+  }
 
-    .nav a:hover {
-      color: #ffeb3b;
-    }
+  .nav-links a:hover {
+    color: #ffeb3b;
+  }
+
+  .nav-icons a {
+    margin-left: 15px;
+    color: white;
+    font-size: 20px;
+    transition: color 0.3s ease;
+  }
+
+  .nav-icons a:hover {
+    color: #ffeb3b;
+  }
+
 
     /* Banner */
     .banner {
@@ -73,12 +87,12 @@
     .banner h1 {
       position: relative;
       font-size: 40px;
-      z-index: 1;
+      
     }
 
     /* Contact Section */
     .contact {
-      padding: 40px 20px;
+      padding: 40px 40px;
       max-width: 1200px;
       margin: auto;
       display: grid;
@@ -89,7 +103,7 @@
     .contact-box {
       background: #b4d1c6;
       padding: 20px;
-      width: 85%;
+      width: 85%; 
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
@@ -119,9 +133,10 @@
     }
 
     .map iframe {
-      width: 100%;
-      height: 260px;
-      border: 0;
+      width: 105%;
+      height: 300px;
+      border: 10px;
+      border-color: red;
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
@@ -138,7 +153,7 @@
 
     .form-box h2 {
       color: teal;
-      text-align: center;
+      text-align: left;
       margin-bottom: 15px;
     }
 
@@ -206,12 +221,27 @@
       color: #ffeb3b;
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .contact {
-        grid-template-columns: 1fr;
-      }
-      .banner h1 {
-        font-size: 28px;
-      }
-    }
+    
+
+    .whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 20px;  /* distance from bottom */
+    right: 20px;   /* distance from right */
+    background-color: #25d366;  /* WhatsApp green */
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    z-index: 100;  /* always on top */
+  }
+
+  .whatsapp-float i {
+    margin-top: 15px;
+  }
+
+  .whatsapp-float:hover {
+    background-color: #1ebe5b;
+  }
