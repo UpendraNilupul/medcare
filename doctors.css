@@ -68,3 +68,44 @@ body {
 .social-icons a:hover {
     color: #1e8c4b;
 }
+/* 🔎 Search & Filter Styling */
+.search-filter {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.search-filter input,
+.search-filter select {
+  padding: 10px 15px;
+  border: 2px solid #2bb673;
+  border-radius: 8px;
+  font-size: 1em;
+  outline: none;
+}
+
+.search-filter input:focus,
+.search-filter select:focus {
+  border-color: #1e8c4b;
+}
+
+/* 🆕 Book Appointment Button */
+.book-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 18px;
+  background-color: #2bb673;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.95em;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.book-btn:hover {
+  background-color: #1e8c4b;
+  transform: scale(1.05);
+}
