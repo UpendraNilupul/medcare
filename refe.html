@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample Homepage</title>
+<style>
+  /* Full screen container */
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+  }
+
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full screen */
+    overflow: hidden;
+  }
+
+  /* Background images */
+  .hero img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+
+  .hero img.active {
+    opacity: 1;
+  }
+
+  /* Email request box */
+  .email-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.6);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+  }
+
+  .email-box h2 {
+    margin-bottom: 15px;
+    font-size: 28px;
+  }
+
+  .email-box input[type="email"] {
+    padding: 10px;
+    width: 250px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+
+  .email-box button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .email-box button:hover {
+    background-color: #218838;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <img src="C:\Users\thurs\Downloads\pop.jpg"class="active">
+  <img src="C:\Users\thurs\Downloads\hosp.jpg">
+  <img src="https://source.unsplash.com/1600x900/?healthcare">
+  
+  <div class="email-box">
+    <h2>Subscribe to Our Newsletter</h2>
+    <input type="email" placeholder="Enter your email">
+    <button onclick="subscribe()">Subscribe</button>
+  </div>
+</div>
+
+<script>
+  // Dynamic image slider
+  let current = 0;
+  const images = document.querySelectorAll('.hero img');
+
+  setInterval(() => {
+    images[current].classList.remove('active');
+    current = (current + 1) % images.length;
+    images[current].classList.add('active');
+  }, 5000); // Change image every 5 seconds
+
+  // Email subscribe action
+  function subscribe() {
+    const emailInput = document.querySelector('.email-box input');
+    if(emailInput.value) {
+      alert(`Thank you for subscribing, ${emailInput.value}!`);
+      emailInput.value = '';
+    } else {
+      alert('Please enter a valid email.');
+    }
+  }
+</script>
+
+</body>
+</html>
