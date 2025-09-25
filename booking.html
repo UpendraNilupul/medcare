@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Doctor Booking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Search Your Doctor Here</h2>
+    
+    <input type="text" placeholder="Search doctor by name" id="doctorName">
+    
+    <select id="specialty">
+      <option value="">Select Speciality</option>
+      <option value="cardiology">Cardiology</option>
+      <option value="neurology">Neurology</option>
+      <option value="orthopedics">Orthopedics</option>
+      <option value="dermatology">Dermatology</option>
+    </select>
+    
+    <input type="date" id="appointmentDate">
+    
+    <button onclick="searchDoctors()">🔍 Search Doctors</button>
+  </div>
+
+  <script>
+    function searchDoctors() {
+      const name = document.getElementById("doctorName").value;
+      const specialty = document.getElementById("specialty").value;
+      const date = document.getElementById("appointmentDate").value;
+
+      alert(`Searching for:\nDoctor: ${name}\nSpecialty: ${specialty}\nDate: ${date}`);
+    }
+  </script>
+  <div class="main-flex-container" style="display: flex; gap: 140px; padding: 180px;">
+    
+  <!-- Left Side: Symptom Box -->
+  <div class="symptom-box">
+    <h1>Tell Us Your Symptom</h1>
+    <h2>Find the Right Consultant Easily</h2>
+    <p>
+      Searching for the right specialist has never been easier.
+      Simply type a keyword—like “Kidney Stones” or “Heart Disease”—
+      and instantly find consultants specializing in your condition.
+      Get expert care tailored to your needs, all in just a few clicks.
+    </p>
+
+    <h2 align="center">Most common Symptoms</h2>
+    <div class="symptom-tags">
+      <button>FEVER</button>
+      <button>COUGH</button>
+      <button>HEADACHE</button>
+      <button>RASH</button>
+      <button>JOINT & MUSCLE PAIN</button>
+      <button>DIARRHEA</button>
+      <button>SHORTNESS OF BREATH</button>
+      <button>ANXIETY & DEPRESSION</button>
+    </div>
+
+    <div class="search-box">
+      <input type="text" placeholder="Search..." />
+    </div>
+  </div>
+
+  <!-- Right Side: Your Existing Doctor Booking Box -->
+  <div class="doctor-search-box">
+    <!-- Keep your existing form here -->
+  </div>
+</div>
+
+   
