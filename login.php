@@ -1,9 +1,9 @@
 <?php
 // Database connection settings
 $servername = "localhost";
-$username_db = "root"; // Change if your MySQL username is different
-$password_db = "";     // Change if your MySQL password is set
-$dbname = "Medcare";   // Change to your actual database name
+$username_db = "root"; 
+$password_db = "";     
+$dbname = "Medcare";   
 
 // Create connection
 $conn = new mysqli($servername, $username_db, $password_db, $dbname);
@@ -18,24 +18,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // Prepare and execute query
-    $stmt = $conn->prepare("SELECT * FROM patients WHERE email = ? AND password = ?");
-    $stmt->bind_param("ss", $email, $password); // Use hashed password in production!
+    // Fetch the hashed password from DB
+    $stmt = $conn->prepare("SELECT id, password FROM patients WHERE email = ?");
+    $stmt->bind_param("s", $email);
     $stmt->execute();
-    $result = $stmt->get_result();
+    $stmt->store_result();
 
-    if ($result->num_rows === 1) {
-        // Successful login
-        //header("Location: index.html");
-        echo "<script>alert('Successfully logged in!'); window.location.href='index.html';</script>";
-        exit();
+    if ($stmt->num_rows === 1) {
+        $stmt->bind_result($user_id, $hashedPassword);
+        $stmt->fetch();
+
+        if (password_verify($password, $hashedPassword)) {
+            $_SESSION['user_id'] = $user_id;
+            echo "<script>alert('Login successful!'); window.location.href='index.html';</script>";
+            exit();
+        } else {
+            echo "❌ Invalid email or password.";
+        }
     } else {
-        echo "Invalid email or password.";
+        echo "❌ Invalid email or password.";
     }
     $stmt->close();
-} else {
-    echo "Invalid request.";
 }
-
 $conn->close();
 ?>
