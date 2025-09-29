@@ -1,4 +1,6 @@
 <?php
+session_start(); // start session for login tracking
+
 // Database connection settings
 $servername = "localhost";
 $username_db = "root"; 
@@ -30,7 +32,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (password_verify($password, $hashedPassword)) {
             $_SESSION['user_id'] = $user_id;
-            echo "<script>alert('Login successful!'); window.location.href='index.html';</script>";
+            $_SESSION['email'] = $email;
+
+            // ✅ Check if admin (email ends with @medcare.lk)
+            if (str_ends_with($email, "@medcare.lk")) {
+                $_SESSION['role'] = "admin";
+                echo "<script>alert('Admin login successful!'); window.location.href='admin_dashboard.php';</script>";
+            } else {
+                $_SESSION['role'] = "patient";
+                echo "<script>alert('Patient login successful!'); window.location.href='index.html';</script>";
+            }
             exit();
         } else {
             echo "❌ Invalid email or password.";
@@ -42,3 +53,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 $conn->close();
 ?>
+
