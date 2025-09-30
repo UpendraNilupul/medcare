@@ -1,412 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedCare - Login</title>
-    <!-- font awesome cdn link  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medcare - Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        :root {
-            --green: #16a085;
-            --black: #444;
-            --light-color: #777;
-            --box-shadow: .5rem .5rem 0 rgba(22, 160, 133, .2);
-            --text-shadow: .4rem .4rem 0 rgba(0, 0, 0, .2);
-            --border: .2rem solid var(--green);
-        }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      line-height: 1.6;
+    }
 
-        body {
-            background: linear-gradient(135deg, #fff 0%, #fff 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
+    /* Header */
+    .header {
+      text-align: center;
+      background: teal;
+      padding: 20px;
+    }
 
-        .login-container {
-            background: white;
-            border-radius: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            max-width: 900px;
-            width: 100%;
-            min-height: 600px;
-        }
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        .login-left {
-            background: linear-gradient(135deg, var(--green) 0%, #1abc9c 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            padding: 3rem;
-            text-align: center;
-        }
+    .logo i {
+      margin-right: 8px;
+      color: #ffeb3b;
+      font-size: 26px;
+    }
 
-        .login-left .logo {
-            font-size: 3rem;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+    /* Navbar */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #004d4d;
+      padding: 10px 20px;
+    }
 
-        .login-left .logo i {
-            color: white;
-            animation: pulse 2s infinite;
-        }
+    .nav-links a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
+    .nav-links a:hover {
+      color: #ffeb3b;
+    }
 
-        .login-left h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: var(--text-shadow);
-        }
+    .nav-icons a {
+      margin-left: 15px;
+      color: white;
+      font-size: 20px;
+      transition: color 0.3s ease;
+    }
 
-        .login-left p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            line-height: 1.6;
-        }
+    .nav-icons a:hover {
+      color: #ffeb3b;
+    }
 
-        .login-right {
-            padding: 3rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+    /* Banner */
+    .banner {
+      position: relative;
+      height: 250px;
+      background: url('image/online-medical-help-concept-woman-doctor-glasses-face-mask-showing-mobile-phone-screen-app.jpg') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      padding-left: 40px;
+      color: white;
+    }
 
-        .login-form h3 {
-            color: var(--black);
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
+    .banner::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 109, 119, 0.6);
+    }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
+    .banner h1 {
+      position: relative;
+      font-size: 40px;
+    }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--black);
-            font-weight: 500;
-        }
+    /* Login Section */
+    .login-section {
+      padding: 40px 20px;
+      max-width: 600px;
+      margin: 40px auto;
+      background: #b4d1c6;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
 
-        .form-group input {
-            width: 100%;
-            padding: 1rem 1rem 1rem 3rem;
-            border: var(--border);
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: #f8f9fa;
-        }
+    .login-section h2 {
+      color: teal;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+    }
 
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--green);
-            box-shadow: var(--box-shadow);
-            background: white;
-        }
+    .form-group {
+      margin-bottom: 20px;
+    }
 
-        .form-group i {
-            position: absolute;
-            top: 2.2rem;
-            left: 1rem;
-            color: var(--light-color);
-            font-size: 1.1rem;
-        }
+    .form-group label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+      color: #333;
+    }
 
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
 
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+    .form-group input:focus {
+      border-color: teal;
+      outline: none;
+    }
 
-        .remember-me input[type="checkbox"] {
-            width: auto;
-        }
+    .btn {
+      width: 100%;
+      padding: 12px 20px;
+      background: teal;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
 
-        .forgot-password {
-            color: var(--green);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: opacity 0.3s ease;
-        }
+    .btn:hover {
+      background: #006064;
+    }
 
-        .forgot-password:hover {
-            opacity: 0.8;
-        }
+    .login-links {
+      text-align: center;
+      margin-top: 20px;
+    }
 
-        .login-btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--green);
-            color: white;
-            border: none;
-            border-radius: 0.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+    .login-links a {
+      color: teal;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 10px;
+    }
 
-        .login-btn:hover {
-            background: #138d75;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(22, 160, 133, 0.3);
-        }
+    .login-links a:hover {
+      color: #006064;
+    }
 
-        .divider {
-            text-align: center;
-            margin: 2rem 0;
-            position: relative;
-            color: var(--light-color);
-        }
+    /* Admin Button */
+    .admin-access {
+      text-align: center;
+      margin: 20px 0;
+    }
 
-        .divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: #e0e0e0;
-        }
+    .admin-btn {
+      background: #ff6b35;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      transition: background 0.3s ease;
+    }
 
-        .divider span {
-            background: white;
-            padding: 0 1rem;
-        }
+    .admin-btn:hover {
+      background: #e55a2b;
+    }
 
-        .user-type-selector {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 25px 15px;
+      background: teal;
+      color: white;
+      margin-top: 40px;
+    }
 
-        .user-type {
-            padding: 1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 0.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: #f8f9fa;
-        }
+    .footer h2 {
+      margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffeb3b;
+    }
 
-        .user-type:hover, .user-type.active {
-            border-color: var(--green);
-            background: var(--green);
-            color: white;
-        }
+    .footer-links {
+      margin: 10px 0;
+    }
 
-        .user-type i {
-            display: block;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 8px;
+      font-weight: bold;
+    }
 
-        .back-home {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            background: white;
-            color: var(--green);
-            padding: 0.8rem 1.5rem;
-            border-radius: 2rem;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
+    .footer-links a:hover {
+      color: #ffeb3b;
+    }
 
-        .go-admin {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            background: white;
-            color: var(--green);
-            padding: 0.8rem 1.5rem;
-            border-radius: 2rem;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      z-index: 100;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .back-home:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .go-admin:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        @media (max-width: 768px) {
-            .login-container {
-                grid-template-columns: 1fr;
-                margin: 1rem;
-            }
-
-            .login-left {
-                order: 2;
-                padding: 2rem;
-            }
-
-            .login-left .logo {
-                font-size: 2rem;
-            }
-
-            .login-left h2 {
-                font-size: 2rem;
-            }
-
-            .login-right {
-                padding: 2rem;
-            }
-
-            .user-type-selector {
-                grid-template-columns: 1fr;
-            }
-
-            .back-home {
-                top: 1rem;
-                left: 1rem;
-                padding: 0.6rem 1rem;
-            }
-        }
-
-        .loading {
-            display: none;
-        }
-
-        .loading.active {
-            display: inline-block;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
+    .whatsapp-float:hover {
+      background-color: #1ebe5b;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header class="header" style="display: flex; align-items: center; justify-content: center; gap: 15px;">
-        <img src="image/hospitalLogo.png" alt="hospital logo" width  = "60" height = "60" style="border-radius: 50%;">
-        <h1 style="font-size: 50px; color: #96ecb3;">Medcare Center</h1>
-    </header>
+  <!-- Header -->
+  <header class="header" style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+    <img src="image/hospitalLogo.png" alt="hospital logo" width="60" height="60" style="border-radius: 50%;">
+    <h1 style="font-size: 50px; color: #96ecb3;">Medcare Center</h1>
+  </header>
 
-    <!-- Navbar -->
-    <nav class="nav">
+  <!-- Navbar -->
+  <nav class="nav">
     <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Services</a>
-        <a href="#">About</a>
-        <a href="#">Doctors</a>
-        <a href="#">Book</a>
-        <a href="#contact">ContactUs</a>
+      <a href="index.html">Home</a>
+      <a href="#">Services</a>
+      <a href="#">About</a>
+      <a href="#">Doctors</a>
+      <a href="#">Book</a>
+      <a href="#contact">ContactUs</a>
     </div>
 
     <div class="nav-icons">
-        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
-        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://x.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://x.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
     </div>
-    </nav>
+  </nav>
 
-    <a href="index.html" class="back-home">
-        <i class="fas fa-arrow-left"></i> Back to Home
-    </a>
+  <!-- Banner -->
+  <div class="banner">
+    <h1>Patient Login</h1>
+  </div>
 
-    <a href="admin.html" class="go-admin">
-        <i class="fas fa-user-shield"></i> Admin Login
-    </a>
-
+  <!-- Login Form Section -->
+  <section class="login-section">
+    <h2>Sign In to Your Account</h2>
     
+    <form action="login.php" method="POST">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
 
-    <div class="login-container">
-        <div class="login-left">
-            <div class="logo">
-                <i class="fas fa-heartbeat"></i>
-                <span>MedCare</span>
-            </div>
-            <h2>Welcome Back!</h2>
-            <p>Access your medical dashboard and manage your healthcare journey with our comprehensive platform.</p>
-        </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+      </div>
 
-        <div class="login-right">
-            
-            <form action="login.php" class="login-form" id="loginForm" method="POST">
-                <h3>Sign In</h3>
-                
-                
+      <button type="submit" class="btn">Sign In</button>
+    </form>
 
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                    <i class="fas fa-envelope"></i>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                    <i class="fas fa-lock"></i>
-                </div>
-
-                
-
-                <button type="submit" class="login-btn">
-                    <span class="btn-text">Sign In</span>
-                    <i class="fas fa-spinner loading"></i>
-                </button>
-
-                <div class="divider">
-                    <br><br>
-                    <span>Don't have an account? <a href="register.html" style="color: var(--green); text-decoration: none;">Register here</a></span>
-                </div>
-            </form>
-        </div>
+    <div class="login-links">
+      <a href="register.html">Don't have an account? Register here</a>
     </div>
 
+    <div class="admin-access">
+      <a href="admin.html" class="admin-btn">
+        <i class="fas fa-user-shield"></i> Admin Access
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px;">
+      <img src="image/hospitalLogo.png" alt="hospital logo" width="50" height="50" style="border-radius: 50%; margin-bottom: 10px;">
+      <h2>Medcare Center</h2>
+    </div>
     
-    
+    <p>&copy; Medcare Center. All rights reserved.</p>
+
+    <!-- Quick Links -->
+    <div class="footer-links">
+      <a href="index.html">Home</a> | 
+      <a href="#">About</a> | 
+      <a href="#">Services</a> | 
+      <a href="#contact">Contact</a>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float Button -->
+  <a href="https://wa.me/94714783615" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
 </body>
 </html>
