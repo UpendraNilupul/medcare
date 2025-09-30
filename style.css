@@ -1,82 +1,110 @@
-/* General Reset */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-blue: #1e3a8a;
+  --secondary-blue: #3b82f6;
+  --accent-green: #10b981;
+  --light-blue: #dbeafe;
+  --white: #ffffff;
+  --gray-light: #f8fafc;
+  --gray-dark: #64748b;
+  --text-dark: #1e293b;
+  --green: #16a085;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
   line-height: 1.6;
-  background-color: #f5f9fc;
-  color: #333;
-  
-  
-
-
+  background: #f5f9fc;
+  color: var(--text-dark);
 }
 
 /* Top Header */
 .top-header {
-  background-color: #003366;
-  color: #fff;
-  padding: 10px 0;
-}
-
-.top-header .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 5%;
-}
-
-.contact-info span {
-  margin-right: 20px;
-}
-
-.social-links a {
-  color: #fff;
-  margin-left: 10px;
-  font-size: 1rem;
-}
-
-.main-header .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 5%;
-}
-
-.navbar {
-  display: flex;
-  gap: 20px;
-}
-
-.navbar a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-}
-
-.right-header {
-  margin-left: auto;
-}
-
-.appointment-btn {
-  background-color: #d32f2f;
+  background: var(--green);
   color: white;
-  padding: 10px 20px;
+  padding: 0.8rem 0;
+}
+.top-header .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.contact-info {
+  display: flex;
+  gap: 2rem;
+}
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+.social-links a {
+  color: white;
+  font-size: 1.2rem;
+}
+
+/* Main Header / Navbar */
+.main-header {
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.main-header .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--green);
   text-decoration: none;
-  border-radius: 4px;
-  white-space: nowrap;
+}
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+}
+.nav-menu a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+.nav-menu a:hover {
+  color: var(--green);
+}
+.appointment-btn {
+  background: var(--accent-green);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.appointment-btn:hover {
+  background: #059669;
+  transform: translateY(-2px);
 }
 
-.appointment-btn i {
-  margin-right: 8px;
-}
-
-
-/* Main Layout */
+/* Booking Page Layout */
 .main-flex-container {
   display: flex;
   padding: 40px 5%;
@@ -84,40 +112,35 @@ body {
   flex-wrap: wrap;
 }
 
-/* Left: Symptom Box */
+/* Symptom Box */
 .symptom-box {
   flex: 1;
   min-width: 300px;
-  background-color: #fff;
+  background: white;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-
-.symptom-box h1,
-.symptom-box h2 {
+.symptom-box h1 {
+  font-size: 1.8rem;
   margin-bottom: 10px;
 }
-
 .symptom-box p {
   margin-bottom: 20px;
 }
-
 .symptom-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 20px;
 }
-
 .symptom-tags button {
   padding: 6px 12px;
-  background-color: #e3e3e3;
+  background: #e3e3e3;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
-
 .search-box input {
   width: 100%;
   padding: 10px;
@@ -125,121 +148,22 @@ body {
   border: 1px solid #ccc;
 }
 
-/* Right: Booking Form */
+/* Booking Form */
 .doctor-search-box {
   flex: 1;
   min-width: 300px;
-  background-color: #fff;
+  background: white;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-
 .doctor-search-box h2 {
   margin-bottom: 20px;
 }
-
 form input,
 form select,
 form textarea {
   display: inline-block;
   margin: 8px 5px;
   padding: 10px;
-  width: calc(48% - 10px);
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-form textarea {
-  width: 100%;
-  height: 80px;
-}
-
-form select {
-  width: calc(48% - 10px);
-}
-
-form button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #28a745;
-  border: none;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-form button:hover {
-  background-color: #218838;
-}
-
-label.consent {
-  display: block;
-  margin-top: 10px;
-}
-
-label.consent input {
-  margin-right: 8px;
-}
-
-/* Footer */
-.site-footer {
-  background-color: #003366;
-  color: white;
-  padding: 40px 5%;
-  margin-top: 60px;
-}
-
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.footer-left,
-.footer-right,
-.footer-icon-left {
-  margin-bottom: 20px;
-}
-
-.footer-logo {
-  width: 100px;
-  margin-bottom: 10px;
-}
-
-.quick-links {
-  list-style: none;
-  padding: 0;
-}
-
-.quick-links li {
-  margin-bottom: 10px;
-}
-
-.quick-links a {
-  color: white;
-  text-decoration: none;
-}
-
-.quick-links a:hover {
-  text-decoration: underline;
-}
-
-.footer-icon-left img {
-  width: 60px;
-}
-
-.whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 60px;
-  height: 60px;
-  z-index: 999;
-}
-
-.whatsapp-float img {
-  width: 100%;
-  height: auto;
-  border-radius: 50%;
-}
+  width
