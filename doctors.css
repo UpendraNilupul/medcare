@@ -1,3 +1,15 @@
+:root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --accent-green: #10b981;
+            --light-blue: #dbeafe;
+            --white: #ffffff;
+            --gray-light: #f8fafc;
+            --gray-dark: #64748b;
+            --text-dark: #1e293b;
+			 --green:#16a085;
+        }
+       
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f7f9;

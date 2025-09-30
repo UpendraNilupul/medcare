@@ -8,6 +8,46 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
+<div class="top-header">
+        <div class="container">
+            <div class="contact-info">
+                <span><i class="fas fa-phone"></i> +94 11 5 777 777</span>
+                <span><i class="fas fa-envelope"></i> info@nawaloka.com</span>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>medcare</span>
+            </a>
+            <nav class="nav-menu">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#about">About</a>
+                <a href="#doctors">Doctors</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <a href="#" class="appointment-btn">
+                <i class="fas fa-calendar-check"></i>
+                Book Appointment
+            </a>
+        </div>
+    </header>
+
+
+
+
   <section class="doctors-section">
     <h2>Meet Our Doctors</h2>
 
@@ -187,6 +227,52 @@
 
     searchInput.addEventListener('input', filterDoctors);
     specialtyFilter.addEventListener('change', filterDoctors);
+
+
+    
   </script>
+
+<footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#home">Home</a>
+                    <a href="#services">Services</a>
+                    <a href="#about">About Us</a>
+                    <a href="#doctors">Doctors</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <a href="#">Emergency Care</a>
+                    <a href="#">Cardiology</a>
+                    <a href="#">Oncology</a>
+                    <a href="#">Surgery</a>
+                    <a href="#">Diagnostics</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <a href="tel:+94115777777"><i class="fas fa-phone"></i> +94 11 5 777 777</a>
+                    <a href="mailto:info@nawaloka.com"><i class="fas fa-envelope"></i> info@nawaloka.com</a>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i> 23, Deshamanya H.K. Dharmadasa Mawatha, Colombo</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <a href="#" style="font-size: 1.5rem;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
+                        <a href="#" style="font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nawaloka Hospital. All rights reserved. | Excellence in Healthcare Since 1985</p>
+            </div>
+        
+		</div>
+    </footer>
+
 </body>
 </html>
