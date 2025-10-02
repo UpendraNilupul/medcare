@@ -33,15 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $hashedPassword)) {
             $_SESSION['user_id'] = $user_id;
             $_SESSION['email'] = $email;
+            $_SESSION['role'] = "patient";
 
-            // ✅ Check if admin (email ends with @medcare.lk)
-            if (str_ends_with($email, "@medcare.lk")) {
-                $_SESSION['role'] = "admin";
-                echo "<script>alert('Admin login successful!'); window.location.href='admin_dashboard.php';</script>";
-            } else {
-                $_SESSION['role'] = "patient";
-                echo "<script>alert('Patient login successful!'); window.location.href='index.html';</script>";
-            }
+            // Patient login successful - redirect to main page
+            echo "<script>alert('Patient login successful!'); window.location.href='index.html';</script>";
             exit();
         } else {
             echo "❌ Invalid email or password.";
