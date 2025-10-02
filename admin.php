@@ -13,10 +13,10 @@ if ($conn->connect_error) {
     die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
 }
 
-// Fetch patient users (you can change table name if needed)
-$sql = "SELECT id, full_name, email, phone, blood_group, gender, age  
-        FROM users 
-        ORDER BY created_at DESC";
+// Fetch patient users from patients table
+$sql = "SELECT id, full_name, email, phone_number as phone, blood_group, gender, age  
+        FROM patients 
+        ORDER BY id DESC";
 
 $result = $conn->query($sql);
 
