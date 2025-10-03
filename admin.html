@@ -691,10 +691,10 @@
           </a>
           <nav class="nav-menu">
               <a href="index.html">Home</a>
-              <a href="#services">Services</a>
-              <a href="#about">About</a>
+              <a href="#table-section">User Management</a>
+              <a href="#about">Appointments</a>
               <a href="#doctors">Doctors</a>
-              <a href="#contact">Contact</a>
+              
           </nav>
           <a href="login.html" class="appointment-btn">
               <i class="fas fa-sign-out-alt"></i>
@@ -752,7 +752,7 @@
 
               <!-- Admin Actions -->
               <div class="admin-actions">
-                  <a href="#" class="btn">
+                  <a href="#" class="btn" onclick="openAddUserModal()">
                       <i class="fas fa-plus"></i> Add New Patient
                   </a>
                   <a href="#" class="btn btn-secondary">
@@ -933,6 +933,77 @@
     </div>
   </div>
 
+  <!-- Add User Modal -->
+  <div id="addUserModal" class="modal">
+    <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
+      <div class="modal-header">
+        <h2>Add New Patient</h2>
+        <span class="close" onclick="closeAddUserModal()">&times;</span>
+      </div>
+      <form id="addUserForm">
+        <div class="form-group">
+          <label for="addFullName">Full Name:</label>
+          <input type="text" id="addFullName" name="full_name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="addEmail">Email:</label>
+          <input type="email" id="addEmail" name="email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="addPassword">Password:</label>
+          <input type="password" id="addPassword" name="password" required minlength="6">
+        </div>
+        
+        <div class="form-group">
+          <label for="addPhone">Phone Number:</label>
+          <input type="text" id="addPhone" name="phone_number" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="addGender">Gender:</label>
+          <select id="addGender" name="gender" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="addAge">Age:</label>
+          <input type="number" id="addAge" name="age" min="1" max="120" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="addBloodGroup">Blood Group:</label>
+          <select id="addBloodGroup" name="blood_group">
+            <option value="">Select Blood Group</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="addNationalId">National ID:</label>
+          <input type="text" id="addNationalId" name="national_id" required>
+        </div>
+        
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="closeAddUserModal()">Cancel</button>
+          <button type="submit" class="btn-save">Add Patient</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
     // Fetch users from PHP backend
     function fetchUsers() {
@@ -1049,6 +1120,15 @@
       document.getElementById('editModal').style.display = 'none';
     }
 
+    function openAddUserModal() {
+      document.getElementById('addUserModal').style.display = 'block';
+    }
+
+    function closeAddUserModal() {
+      document.getElementById('addUserModal').style.display = 'none';
+      document.getElementById('addUserForm').reset();
+    }
+
     // Handle edit form submission
     document.getElementById('editForm').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -1084,11 +1164,50 @@
       });
     });
 
+    // Handle add user form submission
+    document.getElementById('addUserForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const userData = {};
+      
+      // Convert FormData to object
+      for (const [key, value] of formData.entries()) {
+        userData[key] = value;
+      }
+      
+      fetch('user_operations.php?action=add_patient', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Patient added successfully!');
+          closeAddUserModal();
+          fetchUsers(); // Refresh the table
+        } else {
+          alert('Error: ' + data.error);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to add patient');
+      });
+    });
+
     // Close modal when clicking outside of it
     window.onclick = function(event) {
       const modal = document.getElementById('editModal');
+      const addUserModal = document.getElementById('addUserModal');
       if (event.target === modal) {
         closeEditModal();
+      }
+      if (event.target === addUserModal) {
+        closeAddUserModal();
       }
     }
 

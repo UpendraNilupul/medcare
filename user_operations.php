@@ -31,6 +31,8 @@ switch($method) {
             updateUser($conn);
         } elseif ($action === 'delete_user') {
             deleteUser($conn);
+        }  elseif ($action === 'add_patient') {
+            addNewPatient($conn);
         }
         break;
 }
@@ -104,6 +106,58 @@ function deleteUser($conn) {
     }
     $stmt->close();
 }
+
+function addNewPatient($conn) {
+    $input = json_decode(file_get_contents('php://input'), true);
+    
+    $fullName = $input['full_name'] ?? '';
+    $email = $input['email'] ?? '';
+    $phone = $input['phone_number'] ?? '';
+    $bloodGroup = $input['blood_group'] ?? '';
+    $gender = $input['gender'] ?? '';
+    $age = $input['age'] ?? '';
+    $nationalId = $input['national_id'] ?? '';
+    $password = $input['password'] ?? '';
+    
+    // Validate required fields
+    if (empty($fullName) || empty($email) || empty($password)) {
+        echo json_encode(["error" => "Full name, email, and password are required"]);
+        return;
+    }
+    
+    // Check if email already exists
+    $checkStmt = $conn->prepare("SELECT id FROM patients WHERE email = ?");
+    $checkStmt->bind_param("s", $email);
+    $checkStmt->execute();
+    $result = $checkStmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        echo json_encode(["error" => "Email already exists"]);
+        $checkStmt->close();
+        return;
+    }
+    $checkStmt->close();
+    
+    // Hash the password for security
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    
+    // Insert new patient
+    $stmt = $conn->prepare("INSERT INTO patients (full_name, email, phone_number, blood_group, gender, age, national_id, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssss", $fullName, $email, $phone, $bloodGroup, $gender, $age, $nationalId, $hashedPassword);
+    
+    if ($stmt->execute()) {
+        $newPatientId = $conn->insert_id;
+        echo json_encode([
+            "success" => true, 
+            "message" => "Patient added successfully",
+            "patient_id" => $newPatientId
+        ]);
+    } else {
+        echo json_encode(["error" => "Failed to add patient: " . $stmt->error]);
+    }
+    $stmt->close();
+}
+
 
 $conn->close();
 ?>
