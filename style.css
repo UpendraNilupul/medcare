@@ -200,6 +200,8 @@
             font-size: 1.3rem;
             margin-bottom: 2rem;
             opacity: 0.95;
+            color:black;
+            font-size: 3.0rem;
         }
 
         .hero-buttons {
@@ -237,7 +239,7 @@
         }
 
         .btn-secondary:hover {
-            background: white;
+            background: rgb(222, 7, 7);
             color: var(--primary-blue);
         }
 
@@ -477,102 +479,109 @@
 }
 
 
-.mail{
-align:middle;
-
+/* Email Section */
+.mail {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 }
 
-.mail .box-container {
-    display: block;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-    gap:1rem;
-	align:center;
-	text-align:center;
-   
+.mail-overlay {
+  width: 100%;
+  max-width: 800px;
 }
 
-
-
-
-
-
-
-
-
-.mail .box-container .box h3 {
-  font-size: 2rem;  /* smaller */
-  padding: 0.1rem 0;
-  color:var(--green);
+.mail-card {
+  background: #fff;
+  padding: 3rem 3.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: fadeInUp 0.8s ease-in-out;
 }
 
-.mail .box-container .box a {
-    display: grid;
-    font-size: 1.5rem;
-    color:white;
-    padding: 0.1rem 0;
-	padding-right:100rem;
-	text-align:right;
-}
-.mail .box-container .box a,
-.mail .box-container form input,
-.mail .box-container form textarea {
-  font-size: 1.3rem;  /* smaller text */
+.mail-card h2 {
+  color: var(--green);
+  font-size: 2.3rem;
+  margin-bottom: 0.8rem;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-.mail .box-container .box a i {
-    padding-right: 12rem;
-    
-    color:white;
+.mail-card p {
+  color: var(--gray-dark);
+  margin-bottom: 2rem;
 }
 
-.mail .box-container .box a:hover i {
-    padding-right:2rem;
+.mail-form .form-group {
+  margin-bottom: 1.2rem;
 }
 
-.btn {
-  display: inline-block;
-  margin-top: 0rem;
-  padding: .20rem;
-  padding-left: 1rem;
-  border:var(--border);
-  border-radius: .5rem;
-  box-shadow: var(--box-shadow);
-  color:var(--green);
+.mail-form input,
+.mail-form textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mail-form input:focus,
+.mail-form textarea:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 8px rgba(22, 160, 133, 0.5);
+  outline: none;
+}
+
+.mail-form textarea {
+  height: 140px;
+  resize: none;
+}
+
+/* Animated Send Button */
+.btn-send {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--green), var(--accent-green));
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 1.7rem;
-  background: #ffffff;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 5px 15px rgba(22, 160, 133, 0.4);
 }
 
-.btn span {
-  padding:.7rem 1rem;
-  border-radius: .5rem;
-  background: var(--green);
-  color:#3f1414;
-  margin-left: .5rem;
+.btn-send:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(22, 160, 133, 0.6);
+  background: linear-gradient(135deg, var(--accent-green), var(--green));
 }
 
-.btn:hover {
-    background: var(--green);
-    color:hsl(0, 0%, 99%);
+.btn-send i {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
 }
 
-.btn:hover span {
-    color: var(--green);
-    background:#ffffff;
-    margin-left: 1rem;
+.btn-send:hover i {
+  transform: translateX(5px);
 }
+
+/* Animation */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+
 
 
 
