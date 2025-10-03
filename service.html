@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Services</title>
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Font -->
+    <link href="style.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f4f6f9;
+        color: #333;
+      }
+
+      .services {
+        padding: 60px 20px;
+        text-align: center;
+        background: #fff;
+      }
+
+      .services .heading {
+        font-size: 4rem;
+        margin-bottom: 40px;
+        font-weight: 600;
+      }
+
+      .services .heading span {
+        color: #1eb980;
+      }
+
+      .box-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .box {
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .box:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      }
+
+      .box i {
+        font-size: 45px;
+        color: #0abde3;
+        margin-bottom: 15px;
+      }
+
+      .box h3 {
+        font-size: 1.4rem;
+        margin: 12px 0;
+        font-weight: 600;
+        color: #222;
+      }
+
+      .box p {
+        font-size: 0.95rem;
+        color: #666;
+        margin-bottom: 18px;
+        line-height: 1.6;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 10px 18px;
+        background: #0abde3;
+        color: #fff;
+        font-weight: 500;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background 0.3s ease;
+      }
+
+      .btn:hover {
+        background: #0984a3;
+      }
+
+      .btn span {
+        margin-left: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="services" id="services">
+      <h1 class="heading">Our <span>Services</span></h1>
+
+      <div class="box-container">
+        <div class="box">
+          <i class="fas fa-notes-medical"></i>
+          <h3>Free Checkups</h3>
+          <p>
+            Stay on top of your health with regular screenings at no cost,
+            helping you detect issues early and live healthier.
+          </p>
+        </div>
+
+        <div class="box">
+          <i class="fas fa-ambulance"></i>
+          <h3>24/7 Ambulance</h3>
+          <p>
+            Our ambulance service is available around the clock to provide quick
+            and reliable emergency support whenever you need it.
+          </p>
+        </div>
+
+        <div class="box">
+          <i class="fas fa-user-md"></i>
+          <h3>Expert Doctors</h3>
+          <p>
+            Consult with highly qualified and experienced doctors who provide
+            personalized care and trusted medical guidance for every patient
+          </p>
+        </div>
+
+        <div class="box">
+          <i class="fas fa-pills"></i>
+          <h3>Medicines</h3>
+          <p>
+            Access genuine and affordable medicines with ease, ensuring safe and
+            timely delivery for your healthcare needs
+          </p>
+        </div>
+
+        <div class="box">
+          <i class="fas fa-procedures"></i>
+          <h3>Bed Facility</h3>
+          <p>
+            Comfortable and well-equipped hospital beds are available to ensure
+            patients receive proper care and rest during their stay.
+          </p>
+        </div>
+
+        <div class="box">
+          <i class="fas fa-heartbeat"></i>
+          <h3>Total Care</h3>
+          <p>
+            Comprehensive healthcare services under one roof, ensuring patients
+            receive complete support from diagnosis to recovery.
+          </p>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
