@@ -1,45 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-   <meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medcare</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    
 </head>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <body>
     <script>
-  function searchDoctors() {
-    const name = document.getElementById("doctorName").value;
-    const specialty = document.getElementById("specialty").value;
-    const date = document.getElementById("appointmentDate").value;
+        function searchDoctors() {
+            const name = document.getElementById("doctorName").value;
+            const specialty = document.getElementById("specialty").value;
+            const date = document.getElementById("appointmentDate").value;
 
-    alert(`Doctor: ${name}\nSpecialty: ${specialty}\nDate: ${date}`);
-  }
-</script>
+            alert(`Doctor: ${name}\nSpecialty: ${specialty}\nDate: ${date}`);
+        }
+    </script>
 
-    
-  
- <!-- Top Header -->
+    <!-- Top Header -->
     <div class="top-header">
         <div class="container">
             <div class="contact-info">
@@ -63,16 +43,22 @@
                 <span>medcare</span>
             </a>
             <nav class="nav-menu">
-                <a href="#home">Home</a>
-                <a href="#services">Services</a>
+                <a href="index.html">Home</a>
+                <a href="service.html">Services</a>
                 <a href="#about">About</a>
-                <a href="#doctors">Doctors</a>
-                <a href="#contact">Contact</a>
+                <a href="doctors.html">Doctors</a>
+                <a href="ContactUs.html">Contact</a>
             </nav>
-            <a href="#" class="appointment-btn">
-                <i class="fas fa-calendar-check"></i>
-                Book Appointment
-            </a>
+            <div class="header-buttons">
+                <a href="login.html" class="login-btn">
+                    <i class="fas fa-user"></i>
+                    Login
+                </a>
+                <a href="#" class="appointment-btn">
+                    <i class="fas fa-calendar-check"></i>
+                    Book Appointment
+                </a>
+            </div>
         </div>
     </header>
 
@@ -80,16 +66,16 @@
     <section class="hero-section" id="home">
         <div class="hero-slider">
             <div class="hero-slide active">
-                <img src=image/hospital.jpg alt="Modern Hospital">
+                <img src="image/hospital.jpg" alt="Modern Hospital">
             </div>
             <div class="hero-slide">
-                <img src=image/hos2.jpg alt="Healthcare Team">
+                <img src="image/hos2.jpg" alt="Healthcare Team">
             </div>
             <div class="hero-slide">
-                <img src=image/hos3.jpg alt="Medical Equipment">
+                <img src="image/hos3.jpg" alt="Medical Equipment">
             </div>
             <div class="hero-slide">
-                <img src=image/man.jpg alt="Healthcare Team">
+                <img src="image/man.jpg" alt="Healthcare Team">
             </div>
         </div>
         <div class="hero-overlay">
@@ -97,7 +83,6 @@
                 <h1>Excellence in Healthcare</h1>
                 <p>Leading Sri Lanka's healthcare revolution with world-class medical care, cutting-edge technology, and compassionate service for over three decades.</p>
                 <div class="hero-buttons">
-                    
                     <a href="https://youtu.be/45XDv8gH5x4?si=wSmgAK7onY0jSxX5" class="btn-secondary">
                         <i class="fas fa-play"></i>
                         Watch Our Story
@@ -144,42 +129,42 @@
             </div>
             <div class="services-grid">
                 <div class="service-card">
-                    <img src=image/heart.jpg alt="Cardiology">
+                    <img src="image/heart.jpg" alt="Cardiology">
                     <div class="service-content">
                         <h3>Cardiology & Heart Surgery</h3>
                         <p>Advanced cardiac care with state-of-the-art equipment and internationally trained specialists.</p>
                     </div>
                 </div>
                 <div class="service-card">
-                    <img src=image/cancer.jpg alt="Oncology">
+                    <img src="image/cancer.jpg" alt="Oncology">
                     <div class="service-content">
                         <h3>Cancer Care & Oncology</h3>
                         <p>Comprehensive cancer treatment with cutting-edge technology and personalized care plans.</p>
                     </div>
                 </div>
                 <div class="service-card">
-                    <img src=image/eme.jpg alt="Emergency">
+                    <img src="image/eme.jpg" alt="Emergency">
                     <div class="service-content">
                         <h3>24/7 Emergency Care</h3>
                         <p>Round-the-clock emergency services with rapid response teams and advanced life support.</p>
                     </div>
                 </div>
                 <div class="service-card">
-                    <img src=image/min.jpg alt="Surgery">
+                    <img src="image/min.jpg" alt="Surgery">
                     <div class="service-content">
                         <h3>Minimally Invasive Surgery</h3>
                         <p>Advanced surgical techniques with faster recovery times and minimal scarring.</p>
                     </div>
                 </div>
                 <div class="service-card">
-                    <img src=image/mate.jpg alt="Maternity">
+                    <img src="image/mate.jpg" alt="Maternity">
                     <div class="service-content">
                         <h3>Maternity & Pediatrics</h3>
                         <p>Specialized care for mothers and children with family-centered approach to healthcare.</p>
                     </div>
                 </div>
                 <div class="service-card">
-                    <img src=image/diag.jpg alt="Diagnostics">
+                    <img src="image/diag.jpg" alt="Diagnostics">
                     <div class="service-content">
                         <h3>Advanced Diagnostics</h3>
                         <p>State-of-the-art imaging and laboratory services for accurate and timely diagnosis.</p>
@@ -191,12 +176,11 @@
 
     <!-- About Section -->
     <section class="about-section" id="about">
-       
-		<div class="container">
-			<div class="about-grid">
+        <div class="container">
+            <div class="about-grid">
                 <div class="about-content">
                     <h1>About US</h1>
-					<h2>Your Health, Our Priority</h2>
+                    <h2>Your Health, Our Priority</h2>
                     <p>For over 30 years, Nawaloka Hospital has been at the forefront of healthcare excellence in Sri Lanka. We combine world-class medical expertise with compassionate care to provide our patients with the best possible treatment outcomes.</p>
                     <p>Our commitment to innovation and patient-centered care has made us the trusted choice for families across the nation. From routine check-ups to complex procedures, we're here for you every step of the way.</p>
                     <a href="#" class="btn-primary">
@@ -205,39 +189,35 @@
                     </a>
                 </div>
                 <div class="about-image">
-                    <img src=image/about.jpg alt="Hospital Interior">
+                    <img src="image/about.jpg" alt="Hospital Interior">
                 </div>
             </div>
         </div>
-		
-		
-		
-  <section class="mail" id="email">
-  <div class="mail-overlay">
-    <div class="mail-card">
-      <h2><i class="fas fa-envelope-open-text"></i> Email Us</h2>
-      <p>Have questions or need more information? Send us a message and our team will get back to you shortly.</p>
-      <form action="mailto:yourhospital@example.com" method="post" enctype="text/plain" class="mail-form">
-        <div class="form-group">
-          <input type="text" name="name" placeholder="Your Name" required>
-        </div>
-        <div class="form-group">
-          <input type="email" name="email" placeholder="Your Email" required>
-        </div>
-        <div class="form-group">
-          <textarea name="message" placeholder="Your Message" required></textarea>
-        </div>
-        <button type="submit" class="btn-send">
-          <span>Send Message</span> <i class="fas fa-paper-plane"></i>
-        </button>
-      </form>
-    </div>
-  </div>
-</section>
+    </section>
 
-
- 
-		
+    <!-- Email Section -->
+    <section class="mail" id="email">
+        <div class="mail-overlay">
+            <div class="mail-card">
+                <h2><i class="fas fa-envelope-open-text"></i> Email Us</h2>
+                <p>Have questions or need more information? Send us a message and our team will get back to you shortly.</p>
+                <form action="mailto:yourhospital@example.com" method="post" enctype="text/plain" class="mail-form">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-send">
+                        <span>Send Message</span> <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer" id="contact">
@@ -278,63 +258,49 @@
             <div class="footer-bottom">
                 <p>&copy; 2024 Nawaloka Hospital. All rights reserved. | Excellence in Healthcare Since 1985</p>
             </div>
-        
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		</div>
+        </div>
     </footer>
-	
-	
-	
-<!-- Advertisement Popup -->
-<div id="adPopup" style="
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;">
-  
-  <div style="
-    position: relative;
-    
-    padding: 0px;
-    border-radius: 0px;
-    text-align: center;
-    box-shadow: 0 0px 0px rgba(0,0,0,0.35);
-    max-width: 500px;">
-    
-    <!-- Close button -->
-    <span id="closeAd" style="
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-      color: #444;
-      transition: color 0.3s ease;">&times;</span>
-    
-    <!-- Ad image -->
-    <img src=image/ad.jpg alt="Hospital Advertisement" style="
-      width: 100%;
-      max-width: 450px;
-      border-radius: 0px;">
-  </div>
-</div>
- <script src="style.js"></script>
-  
-  
+
+    <!-- Advertisement Popup -->
+    <div id="adPopup" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;">
+
+        <div style="
+            position: relative;
+            padding: 0px;
+            border-radius: 0px;
+            text-align: center;
+            box-shadow: 0 0px 0px rgba(0,0,0,0.35);
+            max-width: 500px;">
+
+            <!-- Close button -->
+            <span id="closeAd" style="
+                position: absolute;
+                top: 8px;
+                right: 12px;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+                color: #444;
+                transition: color 0.3s ease;">&times;</span>
+
+            <!-- Ad image -->
+            <img src="image/ad.jpg" alt="Hospital Advertisement" style="
+                width: 100%;
+                max-width: 450px;
+                border-radius: 0px;">
+        </div>
+    </div>
+
+    <script src="style.js"></script>
 </body>
 </html>
