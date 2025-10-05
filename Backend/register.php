@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssisssss", $fullName, $gender, $age, $nationalId, $phoneNumber, $bloodGroup, $email, $hashedPassword);
 
     if ($stmt->execute()) {
-        echo "<script>alert('Registration successful!'); window.location.href='loginpage.html';</script>";
+        echo "<script>alert('Registration successful!'); window.location.href='../login.html';</script>";
     } else {
         echo "Error: " . $stmt->error;
     }

@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["admin_logged_in"] = true;
 
         // Redirect to admin dashboard
-         echo "<script>alert('Admin login successful!'); window.location.href='admin.html';</script>";
+        echo "<script>alert('Admin login successful!'); window.location.href='../admin.html';</script>";
         exit();
         
     } else {

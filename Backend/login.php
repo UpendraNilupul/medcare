@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['role'] = "patient";
 
             // Patient login successful - redirect to main page
-            echo "<script>alert('Patient login successful!'); window.location.href='index.html';</script>";
+            echo "<script>alert('Patient login successful!'); window.location.href='../index.html';</script>";
             exit();
         } else {
             echo "❌ Invalid email or password.";
