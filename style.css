@@ -421,24 +421,48 @@ form input[type="submit"]:hover,
         .hero-content {
             text-align: center;
             color: white;
+            padding: 2rem;
             max-width: 800px;
-            padding: 0 2rem;
+            margin: 0 auto;
         }
 
         .hero-content h1 {
             font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+            letter-spacing: -1px;
         }
 
-        .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-            color:black;
-            font-size: 3.0rem;
-        }
+        /* Hero Section Paragraph Styling */
+.hero-content p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin: 1.5rem 0 2rem 0;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 600px;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+}
+
+/* Responsive typography for the paragraph */
+@media (max-width: 768px) {
+    .hero-content p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin: 1rem 0 1.5rem 0;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin: 0.8rem 0 1.2rem 0;
+    }
+}
 
         .hero-buttons {
             display: flex;
