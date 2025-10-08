@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medcare - Register</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      background: teal;
+      padding: 20px;
+    }
+
+    .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo i {
+      margin-right: 8px;
+      color: #ffeb3b;
+      font-size: 26px;
+    }
+
+    /* Navbar */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #004d4d;
+      padding: 10px 20px;
+    }
+
+    .nav-links a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    .nav-links a:hover {
+      color: #ffeb3b;
+    }
+
+    .nav-icons a {
+      margin-left: 15px;
+      color: white;
+      font-size: 20px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-icons a:hover {
+      color: #ffeb3b;
+    }
+
+    /* Banner */
+    .banner {
+      position: relative;
+      height: 250px;
+      background: url('image/online-medical-help-concept-woman-doctor-glasses-face-mask-showing-mobile-phone-screen-app.jpg') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      padding-left: 40px;
+      color: white;
+    }
+
+    .banner::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 109, 119, 0.6);
+    }
+
+    .banner h1 {
+      position: relative;
+      font-size: 40px;
+    }
+
+    /* Register Section */
+    .register-section {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: 40px auto;
+      background: #b4d1c6;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .register-section h2 {
+      color: teal;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: teal;
+      outline: none;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px 20px;
+      background: teal;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background: #006064;
+    }
+
+    .register-links {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .register-links a {
+      color: teal;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 10px;
+    }
+
+    .register-links a:hover {
+      color: #006064;
+    }
+
+    .terms-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .terms-checkbox input[type="checkbox"] {
+      width: auto;
+      margin-top: 3px;
+    }
+
+    .terms-checkbox label {
+      font-size: 14px;
+      line-height: 1.4;
+      color: #333;
+    }
+
+    .terms-checkbox a {
+      color: teal;
+      text-decoration: none;
+    }
+
+    .terms-checkbox a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 25px 15px;
+      background: teal;
+      color: white;
+      margin-top: 40px;
+    }
+
+    .footer h2 {
+      margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffeb3b;
+    }
+
+    .footer-links {
+      margin: 10px 0;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 8px;
+      font-weight: bold;
+    }
+
+    .footer-links a:hover {
+      color: #ffeb3b;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      z-index: 100;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .whatsapp-float:hover {
+      background-color: #1ebe5b;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      
+      .register-section {
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+    <img src="image/hospitalLogo.png" alt="hospital logo" width="60" height="60" style="border-radius: 50%;">
+    <h1 style="font-size: 50px; color: #96ecb3;">Medcare Center</h1>
+  </header>
+
+  <!-- Navbar -->
+  <nav class="nav">
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="#">Services</a>
+      <a href="#">About</a>
+      <a href="#">Doctors</a>
+      <a href="#">Book</a>
+      <a href="#contact">ContactUs</a>
+    </div>
+
+    <div class="nav-icons">
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://x.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
+    </div>
+  </nav>
+
+  <!-- Banner -->
+  <div class="banner">
+    <h1>Patient Registration</h1>
+  </div>
+
+  <!-- Registration Form Section -->
+  <section class="register-section">
+    <h2>Create Your Account</h2>
+    
+    <form action="Backend/register.php" method="POST">
+      <div class="form-group full-width">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender" required>
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" placeholder="Enter your age" min="1" max="120" required>
+        </div>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="nationalId">National ID</label>
+        <input type="text" id="nationalId" name="nationalId" placeholder="Enter your National ID" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number</label>
+          <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" required>
+        </div>
+
+        <div class="form-group">
+          <label for="bloodGroup">Blood Group</label>
+          <select id="bloodGroup" name="bloodGroup" required>
+            <option value="">Select Blood Group</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+      </div>
+
+      <div class="terms-checkbox">
+        <input type="checkbox" id="terms" name="terms" required>
+        <label for="terms">
+          I agree to the <a href="#" target="_blank">Terms & Conditions</a> and <a href="#" target="_blank">Privacy Policy</a> of MedCare
+        </label>
+      </div>
+
+      <button type="submit" class="btn">Create Account</button>
+    </form>
+
+    <div class="register-links">
+      <a href="login.html">Already have an account? Sign in here</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px;">
+      <img src="image/hospitalLogo.png" alt="hospital logo" width="50" height="50" style="border-radius: 50%; margin-bottom: 10px;">
+      <h2>Medcare Center</h2>
+    </div>
+    
+    <p>&copy; Medcare Center. All rights reserved.</p>
+
+    <!-- Quick Links -->
+    <div class="footer-links">
+      <a href="index.html">Home</a> | 
+      <a href="#">About</a> | 
+      <a href="#">Services</a> | 
+      <a href="#contact">Contact</a>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float Button -->
+  <a href="https://wa.me/94714783615" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+</body>
+</html>
