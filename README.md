@@ -1,4 +1,4 @@
-# 💊 MedCare Pharmacy Website
+# 💊 MedCare Hospital Website
 
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
@@ -6,7 +6,7 @@
 ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
 
 ## 📋 Project Description
-MedCare is a comprehensive pharmacy website that provides a complete digital platform for pharmaceutical services. The website features user authentication, doctor consultations, appointment booking, and an admin management system for efficient pharmacy operations.
+MedCare is a comprehensive Hospital website that provides a complete digital platform for pharmaceutical services. The website features user authentication, doctor consultations, appointment booking, and an admin management system for efficient pharmacy operations.
 
 ## ✨ Features
 
