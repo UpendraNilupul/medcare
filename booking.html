@@ -49,21 +49,22 @@
   <!-- Booking Form -->
   <section class="main-flex-container">
     <div class="symptom-box">
-  <h1>Describe Your Symptoms</h1>
-  <p>Select common symptoms or describe your issue below.</p>
-  <div class="symptom-tags">
-    <button>Fever</button>
-    <button>Cough</button>
-    <button>Headache</button>
-    <button>Back Pain</button>
-    <button>Allergy</button>
-    <button>Cold</button>
-    <button>Chest Pain</button>
-  </div>
-  <div class="search-box">
-    <input type="text" placeholder="Type your symptoms..."/>
-  </div>
-  <img src="body.png" alt="Human Body Symptom Map" class="symptom-image"/>
+      <h1>Describe Your Symptoms</h1>
+      <p>Select common symptoms or describe your issue below.</p>
+      <div class="symptom-tags">
+      <button>Fever</button>
+      <button>Cough</button>
+      <button>Headache</button>
+      <button>Back Pain</button>
+      <button>Allergy</button>
+      <button>Cold</button>
+      <button>Chest Pain</button>
+      </div>
+      <div class="search-box">
+      <input type="text" placeholder="Type your symptoms..."/>
+      </div>
+      <img src="body.png" alt="Diagram of a human body with highlighted areas for symptom selection, neutral tone, white background" style="width:100%; max-width:400px; height:auto; display:block; margin:1rem auto; background:transparent;" />
+    </div>
 </div>
 
     <!-- Right: Form Box -->
@@ -74,36 +75,52 @@
         
         <input type="email" name="email" placeholder="Email" required/>
         <input type="tel" name="phone" placeholder="Phone Number" required/>
-        <select name="department">
+        <select name="department" id="department-select" required></select>
           <option value="">Select Department</option>
-          <option value="cardiology">Cardiology</option>
+          <option value="consultant">Consultant Cardiologist</option>
           <option value="pediatrics">Pediatrics</option>
+          <option value="surgery">Surgery</option>
+          <option value="dermatology">Dermatology</option>
+          <option value="gynecology">Gynecologist & Obstetrician</option>
           <option value="orthopedics">Orthopedics</option>
-          <option value="neurology">Neurology</option>
-          <option value="neurology">Consultant Cardiologist</option>
-          <option value="neurology">Surgeon</option>
-          <option value="neurology">Dermatology</option>
-          <option value="neurology">Gynecologist & Obstetrician</option>
-          <option value="neurology">Cardiology</option>
-          <option value="neurology">Psychiatrist</option>
+          <option value="cardiology">Cardiology</option>
+          <option value="psychiatry">Psychiatrist</option>
         </select>
-        <select name="doctor">
+        <select name="doctor" id="doctor-select"></select></select>
           <option value="">Preferred Doctor</option>
-          <option value="dr_smith">Dr.Nuwan Perera</option>
-          <option value="dr_jones">Dr.Ishara Jayasinghe</option>
-          <option value="dr_kumar">Dr.Malith Fernando</option>
-          <option value="dr_kumar">Dr.Sanduni Karunarathne</option>
-          <option value="dr_kumar">Dr.Harini Wijesinghe</option>
-          <option value="dr_kumar">Dr.Chaminda de Silva</option>
-          <option value="dr_kumar">Dr.Aravind Rajkumar</option>
-          <option value="dr_kumar">Dr.Pradeepan Selvakumar</option>
-          <option value="dr_kumar">Dr.Navin Yogeswaran</option>
-          <option value="dr_kumar">Dr.David Carter</option>
         </select>
+        <script>
+        const doctorsByDept = {
+          consultant: [{value: "dr_nuwan", label: "Dr.Nuwan Perera"}],
+          pediatrics: [{value: "dr_ishara", label: "Dr.Ishara Jayasinghe"}],
+          surgery: [{value: "dr_malith", label: "Dr.Malith Fernando"}],
+          dermatology: [{value: "dr_sanduni", label: "Dr.Sanduni Karunarathne"}],
+          gynecology: [{value: "dr_harini", label: "Dr.Harini Wijesinghe"}],
+          orthopedics: [{value: "dr_chaminda", label: "Dr.Chaminda de Silva"}],
+          cardiology: [{value: "dr_aravind", label: "Dr.Aravind Rajkumar"}],
+          psychiatry: [{value: "dr_pradeepan", label: "Dr.Pradeepan Selvakumar"}]
+        };
+
+        document.getElementById('department-select').addEventListener('change', function() {
+          const dept = this.value;
+          const doctorSelect = document.getElementById('doctor-select');
+          doctorSelect.innerHTML = '<option value="">Preferred Doctor</option>';
+          if (doctorsByDept[dept]) {
+            doctorsByDept[dept].forEach(doc => {
+              const opt = document.createElement('option');
+              opt.value = doc.value;
+              opt.textContent = doc.label;
+              doctorSelect.appendChild(opt);
+            });
+          }
+        });
+        </script>
         <input type="date" name="date" required/>
        
         <br>
-        <button type="submit">Submit Appointment</button>
+        <button type="submit" class="styled-btn" style="background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%); color: #fff; border: none; border-radius: 30px; padding: 0.8em 2.5em; font-size: 1.1em; font-weight: 600; box-shadow: 0 4px 16px rgba(67,233,123,0.15); cursor: pointer; transition: background 0.3s, transform 0.2s;">
+          <i class="fas fa-paper-plane" style="margin-right: 0.5em;"></i> Submit Appointment
+        </button>
       </form>
     </div>
   </section>
