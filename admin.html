@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Doctor Management</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --accent-green: #10b981;
+            --light-blue: #dbeafe;
+            --white: #ffffff;
+            --gray-light: #f8fafc;
+            --gray-dark: #64748b;
+            --text-dark: #1e293b;
+            --green: #16a085;
+            --admin-dark: #374151;
+            --admin-blue: #1f2937;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--gray-light);
+        }
+
+        /* Header Styles */
+        .top-header {
+            background: var(--admin-dark);
+            color: white;
+            padding: 0.8rem 0;
+        }
+
+        .top-header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .contact-info span {
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: red;
+        }
+
+        .main-header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--admin-dark);
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--admin-dark);
+            border-radius: 2px;
+        }
+
+        .appointment-btn {
+            background: var(--admin-dark);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .appointment-btn:hover {
+            background: var(--admin-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Page Banner */
+        .page-banner {
+            background: url('image/online-medical-help-concept-woman-doctor-glasses-face-mask-showing-mobile-phone-screen-app.jpg') no-repeat center center/cover;
+            height: 30rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .page-banner::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(55, 65, 81, 0.7);
+        }
+
+        .page-banner .banner-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-banner h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .page-banner p {
+            font-size: 1.8rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Admin Dashboard Section */
+        .admin-section {
+            padding: 5rem 0;
+            background: var(--gray-light);
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--admin-dark);
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-header h2 {
+            color: var(--admin-dark);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-subtitle {
+            color: var(--gray-dark);
+            font-size: 1.1rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            border-left: 5px solid var(--admin-dark);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card .stat-icon {
+            font-size: 3rem;
+            color: var(--admin-dark);
+            margin-bottom: 1rem;
+        }
+
+        .stat-card h3 {
+            color: var(--admin-dark);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .stat-card .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--green);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: var(--gray-dark);
+            font-size: 1rem;
+        }
+
+        /* Users Table Section */
+        .table-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .table-section h3 {
+            color: var(--admin-dark);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .data-table th {
+            background: var(--gray-light);
+            font-weight: 600;
+            color: var(--admin-dark);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table tr:hover {
+            background: #f9fafb;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-active {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-inactive {
+          background: #f8d7da;
+          color: #721c24;
+        }
+
+        .status-confirmed {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-completed {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .action-buttons {
+          display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .action-btn.edit {
+            background: var(--green);
+            color: white;
+        }
+
+        .action-btn.edit:hover {
+            background: #138a70;
+            transform: translateY(-2px);
+        }
+
+        .action-btn.delete {
+            background: #dc2626;
+            color: white;
+        }
+
+        .action-btn.delete:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: var(--admin-dark);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--admin-blue);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--gray-dark);
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        /* Admin Actions */
+        .admin-actions {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--admin-dark);
+            color: white;
+            padding: 3rem 0 1rem 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #fbbf24;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 1rem;
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+          color: #ffeb3b;
+        }
+
+        .footer-links {
+          margin: 10px 0;
+        }
+
+        .footer-links a {
+          color: white;
+          text-decoration: none;
+          margin: 0 8px;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #1ebe5b;
+            transform: scale(1.1);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray-light);
+        }
+
+        .modal-header h3 {
+            color: var(--admin-dark);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .close {
+            color: var(--gray-dark);
+            font-size: 2rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--admin-dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--admin-dark);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+
+        .btn-save {
+          background: var(--green);
+          color: white;
+          padding: 0.8rem 1.5rem;
+          border: none;
+          border-radius: 25px;
+          cursor: pointer;
+          font-size: 1rem;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .btn-save:hover {
+          background: #138a70;
+          transform: translateY(-2px);
+        }
+
+        .btn-cancel {
+          background: var(--gray-dark);
+          color: white;
+          padding: 0.8rem 1.5rem;
+          border: none;
+          border-radius: 25px;
+          cursor: pointer;
+          font-size: 1rem;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .btn-cancel:hover {
+          background: #4b5563;
+          transform: translateY(-2px);
+
+        }
+
+        /* Doctor Management Styles */
+        .doctors-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .doctors-table th, .doctors-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .doctors-table th {
+            background-color: #f2f2f2;
+        }
+        .btn-edit, .btn-delete {
+            padding: 5px 10px;
+            margin: 2px;
+            cursor: pointer;
+        }
+        .btn-edit {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .btn-delete {
+            background-color: #f44336;
+            color: white;
+        }
+        .form-container {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-header">
+        <div class="container">
+            <div class="contact-info">
+                <span><i class="fas fa-phone"></i> 0112 345 678</span>
+                <span><i class="fas fa-envelope"></i> admin@medcare.com</span>
+            </div>
+            <div class="social-links">
+                <a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.linkedin.com"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-user-shield"></i>
+                <span>medcare admin</span>
+            </a>
+            <nav class="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#user-management" class="nav-link">User Management</a>
+                <a href="#appointments" class="nav-link">Appointments</a>
+                <a href="#doctors" class="nav-link">Doctors</a>
+                
+            </nav>
+            <a href="login.html" class="appointment-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <div class="banner-content">
+            <h1>Admin Dashboard</h1>
+            <p>Healthcare System Management Portal</p>
+        </div>
+    </section>
+
+    <!-- Admin Dashboard Section -->
+    <section class="admin-section" id="home">
+        <div class="container">
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <h2>Welcome to Admin Dashboard</h2>
+                    <p class="admin-subtitle">Manage patients, doctors, and healthcare data</p>
+                </div>
+                
+                <!-- Statistics Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Total Patients</h3>
+                        <div class="stat-number" id="totalUsers">0</div>
+                        <p>Registered Patients</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3>Doctors</h3>
+                        <div class="stat-number" id="totalDoctors">12</div>
+                        <p>Active Doctors</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3>Appointments</h3>
+                        <div class="stat-number" id="totalAppointments">45</div>
+                        <p>This Month</p>
+                    </div>
+                </div>
+
+                <!-- Admin Actions -->
+                <div class="admin-actions">
+                    <a href="#" class="btn" onclick="openAddUserModal()">
+                        <i class="fas fa-plus"></i> Add New Patient
+                    </a>
+                    <a href="#" class="btn" onclick="openAddDoctorModal()">
+                        <i class="fas fa-user-md"></i> Add New Doctor
+                    </a>
+                    
+                    
+                </div>
+
+                <!-- Users Table -->
+                <div class="table-section" id="user-management">
+                    <h3>
+                        <i class="fas fa-users"></i>
+                        Patient Management
+                    </h3>
+                    <div style="overflow-x: auto;">
+                        <table class="data-table" id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Blood Group</th>
+                                    <th>Status</th>
+                                    <th>Joined</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+            <tbody id="usersTableBody">
+              <!-- Table content will be populated by JavaScript -->
+              <tr>
+                <td>1</td>
+                <td>John Doe</td>
+                <td>john@example.com</td>
+                <td>+94 123 456 789</td>
+                <td>O+</td>
+                <td><span class="status-badge status-active">Active</span></td>
+                <td>2024-01-15</td>
+                <td class="action-buttons">
+                  <button class="action-btn edit">Edit</button>
+                  <button class="action-btn delete">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jane Smith</td>
+                <td>jane@example.com</td>
+                <td>+94 987 654 321</td>
+                <td>A+</td>
+                <td><span class="status-badge status-pending">Pending</span></td>
+                <td>2024-01-20</td>
+                <td class="action-buttons">
+                  <button class="action-btn edit">Edit</button>
+                  <button class="action-btn delete">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Doctors Table -->
+                <div class="table-section" id="doctors">
+    <h3>
+        <i class="fas fa-user-md"></i>
+        Doctor Management
+    </h3>
+    <div style="overflow-x: auto;">
+        <table class="data-table" id="doctorsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Specialization</th>
+                    <th>Qualifications</th>
+                    <th>Available Time</th>
+                    <th>Gender</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="doctorsTableBody">
+                <!-- Table content will be populated by JavaScript -->
+                <tr>
+                    <td>1</td>
+                    <td>Dr. Smith Johnson</td>
+                    <td>smith@medcare.com</td>
+                    <td>+94 123 456 789</td>
+                    <td>Cardiology</td>
+                    <td>MBBS, MD Cardiology</td>
+                    <td>9:00 AM - 5:00 PM</td>
+                    <td>Male</td>
+                    <td class="action-buttons">
+                        <button class="action-btn edit">Edit</button>
+                        <button class="action-btn delete">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+                <!-- Appointments Section -->
+                <div class="table-section" id="appointments">
+                    <h3>
+                        <i class="fas fa-calendar-check"></i>
+                        Appointment Management
+                    </h3>
+                    <div style="overflow-x: auto;">
+                        <table class="data-table" id="appointmentsTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Patient Name</th>
+                                    <th>Doctor</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Specialization</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="appointmentsTableBody">
+                                <!-- Sample appointment data -->
+                                <tr>
+                                    <td>001</td>
+                                    <td>John Doe</td>
+                                    <td>Dr. Nuwan Perera</td>
+                                    <td>2024-10-15</td>
+                                    <td>10:00 AM</td>
+                                    <td>Cardiology</td>
+                                    <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                                    <td class="action-buttons">
+                                        <button class="action-btn edit">Edit</button>
+                                        <button class="action-btn delete">Cancel</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>002</td>
+                                    <td>Jane Smith</td>
+                                    <td>Dr. Ishara Jayasinghe</td>
+                                    <td>2024-10-16</td>
+                                    <td>2:00 PM</td>
+                                    <td>Pediatrics</td>
+                                    <td><span class="status-badge status-pending">Pending</span></td>
+                                    <td class="action-buttons">
+                                        <button class="action-btn edit">Edit</button>
+                                        <button class="action-btn delete">Cancel</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>003</td>
+                                    <td>Mike Johnson</td>
+                                    <td>Dr. Harini Wijesinghe</td>
+                                    <td>2024-10-17</td>
+                                    <td>11:30 AM</td>
+                                    <td>Gynecology</td>
+                                    <td><span class="status-badge status-completed">Completed</span></td>
+                                    <td class="action-buttons">
+                                        <button class="action-btn edit">View</button>
+                                        <button class="action-btn delete">Archive</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Admin Links</h3>
+                    <a href="admin.html">Dashboard</a>
+                    <a href="#user-management">User Management</a>
+                    <a href="#reports">Reports</a>
+                    <a href="#settings">System Settings</a>
+                    <a href="#logs">Activity Logs</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <a href="tel:+94115777777"><i class="fas fa-phone"></i> +94 11 5 777 777</a>
+                    <a href="mailto:admin@medcare.com"><i class="fas fa-envelope"></i> admin@medcare.com</a>
+                    <a href="#"><i class="fas fa-headset"></i> IT Support Desk</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Security</h3>
+                    <div style="margin-top: 1rem;">
+                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">
+                            <i class="fas fa-lock"></i> SSL Encrypted
+                        </p>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">
+                            <i class="fas fa-shield-alt"></i> 2FA Protected
+                        </p>
+                        <p style="font-size: 0.9rem;">
+                            <i class="fas fa-eye"></i> Activity Monitored
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; Medcare Center - Admin Portal. All rights reserved. | Secure Healthcare Management Since 1985</p>
+            </div>
+        </div>
+    </footer>
+    </footer>
+
+ 
+    <!-- Edit User Modal -->
+    <div id="editModal" class="modal">
+      <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
+        <div class="modal-header">
+          <h2>Edit User</h2>
+          <span class="close" onclick="closeEditModal()">&times;</span>
+        </div>
+        <form id="editForm">
+          <input type="hidden" id="editUserId" name="id">
+          
+          <div class="form-group">
+            <label for="editFullName">Full Name:</label>
+            <input type="text" id="editFullName" name="full_name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="editEmail">Email:</label>
+            <input type="email" id="editEmail" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="editPhone">Phone Number:</label>
+            <input type="text" id="editPhone" name="phone_number" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="editGender">Gender:</label>
+            <select id="editGender" name="gender" required>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="editAge">Age:</label>
+            <input type="number" id="editAge" name="age" min="1" max="120" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="editBloodGroup">Blood Group:</label>
+            <select id="editBloodGroup" name="blood_group">
+              <option value="">Select Blood Group</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="editNationalId">National ID:</label>
+            <input type="text" id="editNationalId" name="national_id" required>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" onclick="closeEditModal()">Cancel</button>
+            <button type="submit" class="btn-save">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div id="addUserModal" class="modal">
+      <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
+        <div class="modal-header">
+          <h2>Add New Patient</h2>
+          <span class="close" onclick="closeAddUserModal()">&times;</span>
+        </div>
+        <form id="addUserForm">
+          <div class="form-group">
+            <label for="addFullName">Full Name:</label>
+            <input type="text" id="addFullName" name="full_name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="addEmail">Email:</label>
+            <input type="email" id="addEmail" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="addPassword">Password:</label>
+            <input type="password" id="addPassword" name="password" required minlength="6">
+          </div>
+          
+          <div class="form-group">
+            <label for="addPhone">Phone Number:</label>
+            <input type="text" id="addPhone" name="phone_number" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="addGender">Gender:</label>
+            <select id="addGender" name="gender" required>
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="addAge">Age:</label>
+            <input type="number" id="addAge" name="age" min="1" max="120" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="addBloodGroup">Blood Group:</label>
+            <select id="addBloodGroup" name="blood_group">
+              <option value="">Select Blood Group</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="addNationalId">National ID:</label>
+            <input type="text" id="addNationalId" name="national_id" required>
+          </div>
+          
+          <div class="modal-actions">
+            <button type="button" class="btn-cancel" onclick="closeAddUserModal()">Cancel</button>
+            <button type="submit" class="btn-save">Add Patient</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Add Doctor Modal -->
+    <div id="addDoctorModal" class="modal">
+      <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
+          <div class="modal-header">
+              <h2>Add New Doctor</h2>
+              <span class="close" onclick="closeAddDoctorModal()">&times;</span>
+          </div>
+          <form id="addDoctorForm">
+              <div class="form-group">
+                  <label for="addDoctorName">Full Name:</label>
+                  <input type="text" id="addDoctorName" name="full_name" required>
+              </div>
+              
+              <div class="form-group">
+                  <label for="addDoctorEmail">Email:</label>
+                  <input type="email" id="addDoctorEmail" name="email" required>
+              </div>
+              
+              <div class="form-group">
+                  <label for="addDoctorPhone">Phone Number:</label>
+                  <input type="text" id="addDoctorPhone" name="phone" required>
+              </div>
+              
+              <div class="form-group">
+                  <label for="addDoctorSpecialization">Specialization:</label>
+                  <input type="text" id="addDoctorSpecialization" name="specialization" required>
+              </div>
+              
+              <div class="form-group">
+                  <label for="addDoctorQualifications">Qualifications:</label>
+                  <input type="text" id="addDoctorQualifications" name="qualifications" required>
+              </div>
+              
+              <div class="form-group">
+                  <label for="addDoctorAvailableTime">Available Time:</label>
+                  <input type="text" id="addDoctorAvailableTime" name="available_time" placeholder="e.g., 9:00 AM - 5:00 PM" required>
+              </div>
+              
+              <div class="form-group">
+                  <label for="addDoctorGender">Gender:</label>
+                  <select id="addDoctorGender" name="gender" required>
+                      <option value="">Select Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                  </select>
+              </div>
+              
+              <div class="modal-actions">
+                  <button type="button" class="btn-cancel" onclick="closeAddDoctorModal()">Cancel</button>
+                  <button type="submit" class="btn-save">Add Doctor</button>
+              </div>
+          </form>
+      </div>
+    </div>
+
+    <!-- Edit Doctor Modal -->
+    <div id="editDoctorModal" class="modal">
+      <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
+          <div class="modal-header">
+              <h2>Edit Doctor</h2>
+              <span class="close" onclick="closeEditDoctorModal()">&times;</span>
+          </div>
+          <form id="editDoctorForm">
+              <input type="hidden" id="editDoctorId" name="id">
+              
+              <div class="form-group">
+                  <label for="editDoctorName">Full Name:</label>
+                  <input type="text" id="editDoctorName" name="full_name" required>
+              </div>
+              
+              <div class="form-group">
+                  <label for="editDoctorEmail">Email:</label>
+                  <input type="email" id="editDoctorEmail" name="email" required>
+              </div>
+              
+              <div class="form-group">
+                  <label for="editDoctorPhone">Phone Number:</label>
+                  <input type="text" id="editDoctorPhone" name="phone" required>
+              </div>
+              
+              <div class="form-group">
+                  <label for="editDoctorSpecialization">Specialization:</label>
+                  <input type="text" id="editDoctorSpecialization" name="specialization" required>
+              </div>
+              
+              <div class="form-group">
+                  <label for="editDoctorQualifications">Qualifications:</label>
+                  <input type="text" id="editDoctorQualifications" name="qualifications" required>
+              </div>
+              
+              <div class="form-group">
+                  <label for="editDoctorAvailableTime">Available Time:</label>
+                  <input type="text" id="editDoctorAvailableTime" name="available_time" required>
+              </div>
+              
+              <div class="form-group">
+                  <label for="editDoctorGender">Gender:</label>
+                  <select id="editDoctorGender" name="gender" required>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                  </select>
+              </div>
+              
+              <div class="modal-actions">
+                  <button type="button" class="btn-cancel" onclick="closeEditDoctorModal()">Cancel</button>
+                  <button type="submit" class="btn-save">Save Changes</button>
+              </div>
+          </form>
+      </div>
+    </div>
+
+    <script>
+      // Navigation functionality
+      document.addEventListener('DOMContentLoaded', function() {
+          // Smooth scrolling for navigation links
+          const navLinks = document.querySelectorAll('.nav-link');
+          navLinks.forEach(link => {
+              link.addEventListener('click', function(e) {
+                  e.preventDefault();
+                  const targetId = this.getAttribute('href').substring(1);
+                  const targetSection = document.getElementById(targetId);
+                  
+                  if (targetSection) {
+                      // Remove active class from all links
+                      navLinks.forEach(navLink => navLink.classList.remove('active'));
+                      // Add active class to clicked link
+                      this.classList.add('active');
+                      
+                      // Smooth scroll to target section
+                      targetSection.scrollIntoView({
+                          behavior: 'smooth',
+                          block: 'start'
+                      });
+                  }
+              });
+          });
+
+          // Highlight active section based on scroll position
+          window.addEventListener('scroll', function() {
+              const sections = ['home', 'user-management', 'appointments', 'doctors'];
+              let currentSection = '';
+              
+              sections.forEach(sectionId => {
+                  const section = document.getElementById(sectionId);
+                  if (section) {
+                      const sectionTop = section.offsetTop - 100; // Offset for header
+                      const sectionBottom = sectionTop + section.offsetHeight;
+                      
+                      if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+                          currentSection = sectionId;
+                      }
+                  }
+              });
+              
+              // Update active navigation link
+              navLinks.forEach(link => {
+                  link.classList.remove('active');
+                  if (link.getAttribute('href') === '#' + currentSection) {
+                      link.classList.add('active');
+                  }
+              });
+          });
+          
+          // Set initial active state
+          const firstNavLink = document.querySelector('.nav-link[href="#home"]');
+          if (firstNavLink) {
+              firstNavLink.classList.add('active');
+          }
+      });
+
+      // Fetch users from PHP backend
+      function fetchUsers() {
+        fetch("Backend/admin.php")
+          .then(response => response.json())
+          .then(data => {
+            if (data.error) {
+              console.error("Database error:", data.error);
+              alert("Database connection error: " + data.error);
+            } else {
+              console.log("Data loaded:", data);
+              populateUsersTable(data);
+              updateStats(data);
+            }
+          })
+          .catch(error => {
+            console.error("Fetch error:", error);
+            alert("Failed to connect to server. Make sure PHP server is running on localhost:8000");
+            // Keep sample data if fetch fails
+          });
+      }
+
+      // Populate users table dynamically
+      function populateUsersTable(users) {
+        const tbody = document.getElementById("usersTableBody");
+        tbody.innerHTML = "";
+
+        users.forEach(user => {
+          const row = `
+            <tr>
+              <td>${user.id}</td>
+              <td>${user.full_name}</td>
+              <td>${user.email}</td>
+              <td>${user.phone_number || user.phone || '-'}</td>
+              <td>${user.blood_group || '-'}</td>
+              <td>
+                <span class="status-badge ${
+                  user.status === 'active' ? 'status-active' :
+                  user.status === 'pending' ? 'status-pending' : 'status-inactive'
+                }">${user.status || 'Active'}</span>
+              </td>
+              <td>${user.created_at || 'N/A'}</td>
+              <td class="action-buttons">
+                <button class="action-btn edit" onclick="editUser(${user.id})">Edit</button>
+                <button class="action-btn delete" onclick="deleteUser(${user.id})">Delete</button>
+              </td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        });
+      }
+
+      // Update statistics
+      function updateStats(users) {
+        document.getElementById('totalUsers').textContent = users.length;
+      }
+
+      // Action functions
+      function editUser(id) {
+        // Fetch user data and populate the edit modal
+        fetch(`Backend/user_operations.php?action=get_user&id=${id}`)
+          .then(response => response.json())
+          .then(user => {
+            if (user.error) {
+              alert('Error: ' + user.error);
+            } else {
+              // Populate the form fields
+              document.getElementById('editUserId').value = user.id;
+              document.getElementById('editFullName').value = user.full_name;
+              document.getElementById('editEmail').value = user.email;
+              document.getElementById('editPhone').value = user.phone_number;
+              document.getElementById('editGender').value = user.gender;
+              document.getElementById('editAge').value = user.age;
+              document.getElementById('editBloodGroup').value = user.blood_group || '';
+              document.getElementById('editNationalId').value = user.national_id;
+              
+              // Show the modal
+              document.getElementById('editModal').style.display = 'block';
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to fetch user data');
+          });
+      }
+
+      function deleteUser(id) {
+        if (confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
+          fetch('Backend/user_operations.php?action=delete_user', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: id })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              alert('User deleted successfully');
+              fetchUsers(); // Refresh the table
+            } else {
+              alert('Error: ' + data.error);
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to delete user');
+          });
+        }
+      }
+
+      // Modal functions
+      function closeEditModal() {
+        document.getElementById('editModal').style.display = 'none';
+      }
+
+      function openAddUserModal() {
+        document.getElementById('addUserModal').style.display = 'block';
+      }
+
+      function closeAddUserModal() {
+        document.getElementById('addUserModal').style.display = 'none';
+        document.getElementById('addUserForm').reset();
+      }
+
+      // Fetch doctors from PHP backend
+function fetchDoctors() {
+    fetch("Backend/doctor_operations.php?action=get_all_doctors")
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error("Database error:", data.error);
+                alert("Database connection error: " + data.error);
+            } else {
+                console.log("Doctors data loaded:", data);
+                populateDoctorsTable(data);
+                updateDoctorStats(data);
+            }
+        })
+        .catch(error => {
+            console.error("Fetch error:", error);
+            alert("Failed to connect to server. Make sure PHP server is running on localhost:8000");
+        });
+}
+
+// Populate doctors table dynamically
+function populateDoctorsTable(doctors) {
+    const tbody = document.getElementById("doctorsTableBody");
+    tbody.innerHTML = "";
+
+    doctors.forEach(doctor => {
+        const row = `
+            <tr>
+                <td>${doctor.doctor_id}</td>
+                <td>${doctor.full_name}</td>
+                <td>${doctor.email}</td>
+                <td>${doctor.phone}</td>
+                <td>${doctor.specialization}</td>
+                <td>${doctor.qualifications}</td>
+                <td>${doctor.available_time}</td>
+                <td>${doctor.gender}</td>
+                <td class="action-buttons">
+                    <button class="action-btn edit" onclick="editDoctor(${doctor.doctor_id})">Edit</button>
+                    <button class="action-btn delete" onclick="deleteDoctor(${doctor.doctor_id})">Delete</button>
+                </td>
+            </tr>
+        `;
+        tbody.innerHTML += row;
+    });
+}
+
+// Update doctor statistics
+function updateDoctorStats(doctors) {
+    document.getElementById('totalDoctors').textContent = doctors.length;
+}
+
+// Doctor action functions
+function editDoctor(id) {
+    fetch(`Backend/doctor_operations.php?action=get_doctor&id=${id}`)
+        .then(response => response.json())
+        .then(doctor => {
+            if (doctor.error) {
+                alert('Error: ' + doctor.error);
+            } else {
+                // Populate the form fields
+                document.getElementById('editDoctorId').value = doctor.doctor_id;
+                document.getElementById('editDoctorName').value = doctor.full_name;
+                document.getElementById('editDoctorEmail').value = doctor.email;
+                document.getElementById('editDoctorPhone').value = doctor.phone;
+                document.getElementById('editDoctorSpecialization').value = doctor.specialization;
+                document.getElementById('editDoctorQualifications').value = doctor.qualifications;
+                document.getElementById('editDoctorAvailableTime').value = doctor.available_time;
+                document.getElementById('editDoctorGender').value = doctor.gender;
+                
+                // Show the modal
+                document.getElementById('editDoctorModal').style.display = 'block';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to fetch doctor data');
+        });
+}
+
+function deleteDoctor(id) {
+    if (confirm('Are you sure you want to delete this doctor? This action cannot be undone.')) {
+        fetch('Backend/doctor_operations.php?action=delete_doctor', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: id })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Doctor deleted successfully');
+                fetchDoctors(); // Refresh the table
+            } else {
+                alert('Error: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to delete doctor');
+        });
+    }
+}
+
+// Doctor modal functions
+function openAddDoctorModal() {
+    document.getElementById('addDoctorModal').style.display = 'block';
+}
+
+function closeAddDoctorModal() {
+    document.getElementById('addDoctorModal').style.display = 'none';
+    document.getElementById('addDoctorForm').reset();
+}
+
+function closeEditDoctorModal() {
+    document.getElementById('editDoctorModal').style.display = 'none';
+}
+
+// Handle add doctor form submission
+document.getElementById('addDoctorForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const doctorData = {};
+    
+    // Convert FormData to object
+    for (const [key, value] of formData.entries()) {
+        doctorData[key] = value;
+    }
+    
+    fetch('Backend/doctor_operations.php?action=add_doctor', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(doctorData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Doctor added successfully!');
+            closeAddDoctorModal();
+            fetchDoctors(); // Refresh the table
+        } else {
+            alert('Error: ' + data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to add doctor');
+    });
+});
+
+    // Handle edit doctor form submission
+    document.getElementById('editDoctorForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const doctorData = {};
+      
+      // Convert FormData to object
+      for (const [key, value] of formData.entries()) {
+        doctorData[key] = value;
+      }
+      
+      fetch('Backend/doctor_operations.php?action=update_doctor', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(doctorData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Doctor updated successfully');
+          closeEditDoctorModal();
+          fetchDoctors(); // Refresh the table
+        } else {
+          alert('Error: ' + data.error);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to update doctor');
+      });
+    });
+
+    // Update the existing DOMContentLoaded event listener
+document.addEventListener("DOMContentLoaded", function() {
+    fetchUsers();
+    fetchDoctors();
+});
+
+    // Update the existing window.onclick function
+    window.onclick = function(event) {
+      const modal = document.getElementById('editModal');
+      const addUserModal = document.getElementById('addUserModal');
+      const addDoctorModal = document.getElementById('addDoctorModal');
+      const editDoctorModal = document.getElementById('editDoctorModal');
+      
+      if (event.target === modal) {
+        closeEditModal();
+      }
+      if (event.target === addUserModal) {
+        closeAddUserModal();
+      }
+      if (event.target === addDoctorModal) {
+        closeAddDoctorModal();
+      }
+      if (event.target === editDoctorModal) {
+        closeEditDoctorModal();
+      }
+    }
+
+    // Fetch appointments from PHP backend
+    function fetchAppointments() {
+        fetch("Backend/get_appointments.php")
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log("Appointments data loaded:", data);
+                    populateAppointmentsTable(data.appointments);
+                    updateAppointmentStats(data.statistics);
+                } else {
+                    console.error("Error fetching appointments:", data.message);
+                    alert("Failed to load appointments: " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Fetch error:", error);
+                alert("Failed to connect to server. Make sure PHP server is running on localhost:8000");
+            });
+    }
+
+    // Populate appointments table dynamically
+    function populateAppointmentsTable(appointments) {
+        const tbody = document.getElementById("appointmentsTableBody");
+        tbody.innerHTML = "";
+
+        if (appointments.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 20px;">No appointments found</td></tr>';
+            return;
+        }
+
+        appointments.forEach(appointment => {
+            const statusClass = appointment.status === 'Upcoming' ? 'status-confirmed' : 'status-pending';
+            const row = `
+                <tr>
+                    <td>${appointment.id}</td>
+                    <td>${appointment.patient}</td>
+                    <td>${appointment.doctor}</td>
+                    <td>${appointment.date}</td>
+                    <td>${appointment.time}</td>
+                    <td>${appointment.specialty}</td>
+                    <td><span class="status-badge ${statusClass}">${appointment.status}</span></td>
+                    <td class="action-buttons">
+                        <button class="action-btn edit" onclick="viewAppointment(${appointment.id})">View</button>
+                        <button class="action-btn delete" onclick="cancelAppointment(${appointment.id})">Cancel</button>
+                    </td>
+                </tr>
+            `;
+            tbody.innerHTML += row;
+        });
+    }
+
+    // Update appointment statistics
+    function updateAppointmentStats(stats) {
+        document.getElementById('totalAppointments').textContent = stats.total || 0;
+    }
+
+    // Appointment action functions
+    function viewAppointment(id) {
+        alert(`Viewing appointment details for ID: ${id}`);
+        // You can implement a detailed view modal here
+    }
+
+    function cancelAppointment(id) {
+        if (confirm('Are you sure you want to cancel this appointment?')) {
+            // You can implement appointment cancellation here
+            alert(`Appointment ${id} would be cancelled (feature not implemented yet)`);
+        }
+    }
+
+    // Call on page load
+    document.addEventListener("DOMContentLoaded", function() {
+        fetchUsers();
+        fetchDoctors();
+        fetchAppointments();
+    });
+  </script>
+
+</body>
+</html>

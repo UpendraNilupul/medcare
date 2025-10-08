@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medcare - Patient Registration</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    :root {
+        --primary-blue: #1e3a8a;
+        --secondary-blue: #3b82f6;
+        --accent-green: #10b981;
+        --light-blue: #dbeafe;
+        --white: #ffffff;
+        --gray-light: #f8fafc;
+        --gray-dark: #64748b;
+        --text-dark: #1e293b;
+        --green: #16a085;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+        line-height: 1.6;
+        color: var(--text-dark);
+    }
+
+    /* Header Styles */
+    .top-header {
+        background: var(--green);
+        color: white;
+        padding: 0.8rem 0;
+    }
+
+    .top-header .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .contact-info {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .contact-info span {
+        font-size: 0.9rem;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .social-links a {
+        color: white;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+        color: red;
+    }
+
+    .main-header {
+        background: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .main-header .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 80px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--green);
+        text-decoration: none;
+    }
+
+    .nav-menu {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+    }
+
+    .nav-menu a {
+        text-decoration: none;
+        color: var(--text-dark);
+        font-weight: 500;
+        transition: color 0.3s ease;
+        position: relative;
+    }
+
+    .nav-menu a:hover, .nav-menu a.active {
+        color: var(--green);
+    }
+
+    .appointment-btn {
+        background: var(--accent-green);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        animation: pulse 2s infinite;
+    }
+
+    .appointment-btn:hover {
+        background: #059669;
+        transform: translateY(-2px);
+    }
+
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    /* Page Banner */
+    .page-banner {
+        background: url('image/online-medical-help-concept-woman-doctor-glasses-face-mask-showing-mobile-phone-screen-app.jpg') no-repeat center center/cover;
+        height: 30rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #fff;
+        position: relative;
+    }
+
+    .page-banner::after {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .page-banner .banner-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .page-banner h1 {
+        font-size: 5rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .page-banner p {
+        font-size: 1.8rem;
+    }
+
+    /* Container */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    /* Register Section */
+    .register-section {
+        padding: 5rem 0;
+        background: var(--gray-light);
+    }
+
+    .register-container {
+        max-width: 700px;
+        margin: 0 auto;
+        background: white;
+        padding: 3rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .register-container h2 {
+        color: var(--green);
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group.full-width {
+        grid-column: 1 / -1;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--text-dark);
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: var(--green);
+    }
+
+    .terms-checkbox {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin: 2rem 0;
+        padding: 1rem;
+        background: var(--gray-light);
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+    }
+
+    .terms-checkbox input[type="checkbox"] {
+        width: auto;
+        margin-top: 0.2rem;
+        accent-color: var(--green);
+    }
+
+    .terms-checkbox label {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: var(--text-dark);
+        margin-bottom: 0;
+    }
+
+    .terms-checkbox a {
+        color: var(--green);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .terms-checkbox a:hover {
+        text-decoration: underline;
+    }
+
+    .btn-register {
+        background: var(--green);
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 25px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .btn-register:hover {
+        background: #138a70;
+        transform: translateY(-2px);
+    }
+
+    .register-links {
+        text-align: center;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e2e8f0;
+    }
+
+    .register-links a {
+        color: var(--green);
+        text-decoration: none;
+        font-weight: 500;
+        margin: 0 0.5rem;
+        transition: color 0.3s ease;
+    }
+
+    .register-links a:hover {
+        color: #138a70;
+    }
+
+    .admin-login {
+        background: var(--gray-dark);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        text-decoration: none;
+    }
+
+    .admin-login:hover {
+        background: #475569;
+        transform: translateY(-2px);
+    }
+
+    /* WhatsApp Float */
+    .whatsapp-float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 20px;
+        right: 20px;
+        background-color: #25d366;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        z-index: 1000;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .whatsapp-float:hover {
+        background-color: #1ebe5b;
+        transform: scale(1.1);
+    }
+
+    /* Footer */
+    .footer {
+        background: var(--green);
+        color: white;
+        padding: 3rem 0 1rem 0;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+        margin-bottom: 1rem;
+        color: white;
+    }
+
+    .footer-section a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 0.5rem;
+        transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+        color: var(--accent-green);
+    }
+
+    .footer-bottom {
+        border-top: 1px solid rgba(255,255,255,0.2);
+        padding-top: 1rem;
+        text-align: center;
+        color: rgba(255,255,255,0.8);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .page-banner h1 {
+            font-size: 2.5rem;
+        }
+
+        .nav-menu {
+            display: none;
+        }
+
+        .top-header .container {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-info {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .register-container {
+            margin: 0 1rem;
+            padding: 2rem;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <div class="top-header">
+      <div class="container">
+          <div class="contact-info">
+              <span><i class="fas fa-phone"></i> 0112 345 678</span>
+              <span><i class="fas fa-envelope"></i> contact@medcare.com</span>
+          </div>
+          <div class="social-links">
+              <a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.youtube.com"><i class="fab fa-youtube"></i></a>
+              <a href="https://www.linkedin.com"><i class="fab fa-linkedin"></i></a>
+          </div>
+      </div>
+  </div>
+
+  <!-- Main Header -->
+  <header class="main-header">
+      <div class="container">
+          <a href="index.html" class="logo">
+              <i class="fas fa-heartbeat"></i>
+              <span>medcare</span>
+          </a>
+          <nav class="nav-menu">
+              <a href="index.html">Home</a>
+              <a href="service.html">Services</a>
+              <a href="#about">About</a>
+              <a href="doctors.html">Doctors</a>
+              <a href="ContactUs.html">Contact</a>
+          </nav>
+          <a href="#" class="appointment-btn">
+              <i class="fas fa-calendar-check"></i>
+              Book Appointment
+          </a>
+      </div>
+  </header>
+
+  <!-- Page Banner -->
+  <section class="page-banner">
+      <div class="banner-content">
+          <h1>Patient Registration</h1>
+          <p>Join our healthcare community today</p>
+      </div>
+  </section>
+
+  <!-- Registration Section -->
+  <section class="register-section">
+      <div class="container">
+          <div class="register-container">
+              <h2>Create Your Account</h2>
+              <form action="Backend/register.php" method="POST">
+                  
+                  <div class="form-group full-width">
+                      <label for="fullName">Full Name *</label>
+                      <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                  </div>
+
+                  <div class="form-row">
+                      <div class="form-group">
+                          <label for="gender">Gender *</label>
+                          <select id="gender" name="gender" required>
+                              <option value="">Select Gender</option>
+                              <option value="male">Male</option>
+                              <option value="female">Female</option>
+                              <option value="other">Other</option>
+                          </select>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="age">Age *</label>
+                          <input type="number" id="age" name="age" placeholder="Enter your age" min="1" max="120" required>
+                      </div>
+                  </div>
+
+                  <div class="form-group full-width">
+                      <label for="nationalId">National ID *</label>
+                      <input type="text" id="nationalId" name="nationalId" placeholder="Enter your National ID" required>
+                  </div>
+
+                  <div class="form-row">
+                      <div class="form-group">
+                          <label for="phoneNumber">Phone Number *</label>
+                          <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" required>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="bloodGroup">Blood Group *</label>
+                          <select id="bloodGroup" name="bloodGroup" required>
+                              <option value="">Select Blood Group</option>
+                              <option value="A+">A+</option>
+                              <option value="A-">A-</option>
+                              <option value="B+">B+</option>
+                              <option value="B-">B-</option>
+                              <option value="AB+">AB+</option>
+                              <option value="AB-">AB-</option>
+                              <option value="O+">O+</option>
+                              <option value="O-">O-</option>
+                          </select>
+                      </div>
+                  </div>
+
+                  <div class="form-group full-width">
+                      <label for="email">Email Address *</label>
+                      <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                  </div>
+
+                  <div class="form-group full-width">
+                      <label for="password">Password *</label>
+                      <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+                  </div>
+
+                  <div class="terms-checkbox">
+                      <input type="checkbox" id="terms" name="terms" required>
+                      <label for="terms">
+                          I agree to the <a href="#" target="_blank">Terms & Conditions</a> and <a href="#" target="_blank">Privacy Policy</a> of MedCare Health Center
+                      </label>
+                  </div>
+
+                  <button type="submit" class="btn-register">
+                      <i class="fas fa-user-plus"></i>
+                      Create Account
+                  </button>
+
+                  <div class="register-links">
+                      <p>Already have an account? <a href="login.html">Login Here</a></p>
+                  </div>
+
+                  <a href="adminLogin.html" class="admin-login">
+                      <i class="fas fa-user-shield"></i>
+                      Admin Login
+                  </a>
+              </form>
+          </div>
+      </div>
+  </section>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/94714783615" class="whatsapp-float" target="_blank">
+      <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+      <div class="container">
+          <div class="footer-grid">
+              <div class="footer-section">
+                  <h3>Quick Links</h3>
+                  <a href="index.html">Home</a>
+                  <a href="service.html">Services</a>
+                  <a href="#about">About Us</a>
+                  <a href="doctors.html">Doctors</a>
+                  <a href="ContactUs.html">Contact</a>
+              </div>
+              
+              <div class="footer-section">
+                  <h3>Contact Info</h3>
+                  <a href="tel:+94115777777"><i class="fas fa-phone"></i> +94 11 5 777 777</a>
+                  <a href="mailto:info@medcare.com"><i class="fas fa-envelope"></i> info@medcare.com</a>
+                  <a href="#"><i class="fas fa-map-marker-alt"></i>Medcare Health Center, Hospital Circular Rd, Vavuniya, Sri Lanka</a>
+              </div>
+              <div class="footer-section">
+                  <h3>Follow Us</h3>
+                  <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                      <a href="#" style="font-size: 1.5rem;"><i class="fab fa-facebook-f"></i></a>
+                      <a href="#" style="font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                      <a href="#" style="font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
+                      <a href="#" style="font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+                  </div>
+              </div>
+          </div>
+          <div class="footer-bottom">
+              <p>&copy; Medcare Center. All rights reserved. | Excellence in Healthcare Since 1985</p>
+          </div>
+      </div>
+  </footer>
+
+</body>
+</html>

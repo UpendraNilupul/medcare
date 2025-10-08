@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medcare - Our Services</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    :root {
+        --primary-blue: #1e3a8a;
+        --secondary-blue: #3b82f6;
+        --accent-green: #10b981;
+        --light-blue: #dbeafe;
+        --white: #ffffff;
+        --gray-light: #f8fafc;
+        --gray-dark: #64748b;
+        --text-dark: #1e293b;
+        --green: #16a085;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+        line-height: 1.6;
+        color: var(--text-dark);
+    }
+
+    /* Header Styles */
+    .top-header {
+        background: var(--green);
+        color: white;
+        padding: 0.8rem 0;
+    }
+
+    .top-header .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .contact-info {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .contact-info span {
+        font-size: 0.9rem;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .social-links a {
+        color: white;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+        color: red;
+    }
+
+    .main-header {
+        background: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .main-header .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 80px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--green);
+        text-decoration: none;
+    }
+
+    .nav-menu {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+    }
+
+    .nav-menu a {
+        text-decoration: none;
+        color: var(--text-dark);
+        font-weight: 500;
+        transition: color 0.3s ease;
+        position: relative;
+    }
+
+    .nav-menu a:hover, .nav-menu a.active {
+        color: var(--green);
+    }
+
+    .appointment-btn {
+        background: var(--accent-green);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        animation: pulse 2s infinite;
+    }
+
+    .appointment-btn:hover {
+        background: #059669;
+        transform: translateY(-2px);
+    }
+
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    /* Page Banner */
+    .page-banner {
+        background: linear-gradient(rgba(22, 160, 133, 0.8), rgba(22, 160, 133, 0.8)), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3') no-repeat center center/cover;
+        height: 30rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #fff;
+        position: relative;
+    }
+
+    .page-banner .banner-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .page-banner h1 {
+        font-size: 5rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .page-banner p {
+        font-size: 1.8rem;
+    }
+
+    /* Container */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    /* Services Section */
+    .services-section {
+        padding: 5rem 0;
+        background: var(--gray-light);
+    }
+
+    .services-intro {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .services-intro h2 {
+        color: var(--green);
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .services-intro p {
+        color: var(--gray-dark);
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .box-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .box {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        text-align: center;
+        border: 2px solid transparent;
+    }
+
+    .box:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        border-color: var(--green);
+    }
+
+    .box i {
+        font-size: 3.5rem;
+        color: var(--green);
+        margin-bottom: 1.5rem;
+        transition: transform 0.3s ease;
+    }
+
+    .box:hover i {
+        transform: scale(1.1);
+    }
+
+    .box h3 {
+        font-size: 1.5rem;
+        margin: 1rem 0;
+        font-weight: 600;
+        color: var(--text-dark);
+    }
+
+    .box p {
+        font-size: 1rem;
+        color: var(--gray-dark);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        background: var(--green);
+        color: white;
+        font-weight: 600;
+        border-radius: 25px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+        background: #138a70;
+        transform: translateY(-2px);
+    }
+
+    .btn i {
+        margin-left: 0.5rem;
+        font-size: 1rem;
+    }
+
+    /* WhatsApp Float */
+    .whatsapp-float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 20px;
+        right: 20px;
+        background-color: #25d366;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        z-index: 1000;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .whatsapp-float:hover {
+        background-color: #1ebe5b;
+        transform: scale(1.1);
+    }
+
+    /* Footer */
+    .footer {
+        background: var(--green);
+        color: white;
+        padding: 3rem 0 1rem 0;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+        margin-bottom: 1rem;
+        color: white;
+    }
+
+    .footer-section a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 0.5rem;
+        transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+        color: var(--accent-green);
+    }
+
+    .footer-bottom {
+        border-top: 1px solid rgba(255,255,255,0.2);
+        padding-top: 1rem;
+        text-align: center;
+        color: rgba(255,255,255,0.8);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .page-banner h1 {
+            font-size: 2.5rem;
+        }
+
+        .page-banner p {
+            font-size: 1.2rem;
+        }
+
+        .box-container {
+            grid-template-columns: 1fr;
+        }
+
+        .nav-menu {
+            display: none;
+        }
+
+        .top-header .container {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-info {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .services-intro h2 {
+            font-size: 2rem;
+        }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <div class="top-header">
+      <div class="container">
+          <div class="contact-info">
+              <span><i class="fas fa-phone"></i> 0112 345 678</span>
+              <span><i class="fas fa-envelope"></i> contact@medcare.com</span>
+          </div>
+          <div class="social-links">
+              <a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.youtube.com"><i class="fab fa-youtube"></i></a>
+              <a href="https://www.linkedin.com"><i class="fab fa-linkedin"></i></a>
+          </div>
+      </div>
+  </div>
+
+  <!-- Main Header -->
+  <header class="main-header">
+      <div class="container">
+          <a href="#" class="logo">
+              <i class="fas fa-heartbeat"></i>
+              <span>medcare</span>
+          </a>
+          <nav class="nav-menu">
+              <a href="index.html">Home</a>
+              <a href="service.html" class="active">Services</a>
+              <a href="#about">About</a>
+              <a href="doctors.html">Doctors</a>
+              <a href="ContactUs.html">Contact</a>
+          </nav>
+          <a href="#" class="appointment-btn">
+              <i class="fas fa-calendar-check"></i>
+              Book Appointment
+          </a>
+      </div>
+  </header>
+
+  <!-- Page Banner -->
+  <section class="page-banner">
+      <div class="banner-content">
+          <h1>Our Services</h1>
+          <p>Comprehensive healthcare solutions for your wellbeing</p>
+      </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section">
+      <div class="container">
+          <div class="services-intro">
+              <h2>Excellence in <span style="color: var(--accent-green);">Healthcare</span></h2>
+              <p>We provide comprehensive medical services with state-of-the-art facilities and experienced healthcare professionals dedicated to your wellbeing.</p>
+          </div>
+
+          <div class="box-container">
+              <div class="box">
+                  <i class="fas fa-notes-medical"></i>
+                  <h3>Free Checkups</h3>
+                  <p>
+                      Stay on top of your health with regular screenings at no cost,
+                      helping you detect issues early and live healthier.
+                  </p>
+                  <a href="#" class="btn">Learn More <i class="fas fa-arrow-right"></i></a>
+              </div>
+
+              <div class="box">
+                  <i class="fas fa-ambulance"></i>
+                  <h3>24/7 Ambulance</h3>
+                  <p>
+                      Our ambulance service is available around the clock to provide quick
+                      and reliable emergency support whenever you need it.
+                  </p>
+                  <a href="#" class="btn">Learn More <i class="fas fa-arrow-right"></i></a>
+              </div>
+
+              <div class="box">
+                  <i class="fas fa-user-md"></i>
+                  <h3>Expert Doctors</h3>
+                  <p>
+                      Consult with highly qualified and experienced doctors who provide
+                      personalized care and trusted medical guidance for every patient.
+                  </p>
+                  <a href="#" class="btn">Learn More <i class="fas fa-arrow-right"></i></a>
+              </div>
+
+              <div class="box">
+                  <i class="fas fa-pills"></i>
+                  <h3>Medicines</h3>
+                  <p>
+                      Access genuine and affordable medicines with ease, ensuring safe and
+                      timely delivery for your healthcare needs.
+                  </p>
+                  <a href="#" class="btn">Learn More <i class="fas fa-arrow-right"></i></a>
+              </div>
+
+              <div class="box">
+                  <i class="fas fa-procedures"></i>
+                  <h3>Bed Facility</h3>
+                  <p>
+                      Comfortable and well-equipped hospital beds are available to ensure
+                      patients receive proper care and rest during their stay.
+                  </p>
+                  <a href="#" class="btn">Learn More <i class="fas fa-arrow-right"></i></a>
+              </div>
+
+              <div class="box">
+                  <i class="fas fa-heartbeat"></i>
+                  <h3>Total Care</h3>
+                  <p>
+                      Comprehensive healthcare services under one roof, ensuring patients
+                      receive complete support from diagnosis to recovery.
+                  </p>
+                  <a href="#" class="btn">Learn More <i class="fas fa-arrow-right"></i></a>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/94714783615" class="whatsapp-float" target="_blank">
+      <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+      <div class="container">
+          <div class="footer-grid">
+              <div class="footer-section">
+                  <h3>Quick Links</h3>
+                  <a href="index.html">Home</a>
+                  <a href="service.html">Services</a>
+                  <a href="#about">About Us</a>
+                  <a href="doctors.html">Doctors</a>
+                  <a href="ContactUs.html">Contact</a>
+              </div>
+              
+              <div class="footer-section">
+                  <h3>Contact Info</h3>
+                  <a href="tel:+94115777777"><i class="fas fa-phone"></i> +94 11 5 777 777</a>
+                  <a href="mailto:info@nawaloka.com"><i class="fas fa-envelope"></i> info@nawaloka.com</a>
+                  <a href="#"><i class="fas fa-map-marker-alt"></i>Medcare Health Center, Hospital Circular Rd, Vavuniya, Sri Lanka</a>
+              </div>
+              <div class="footer-section">
+                  <h3>Follow Us</h3>
+                  <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                      <a href="#" style="font-size: 1.5rem;"><i class="fab fa-facebook-f"></i></a>
+                      <a href="#" style="font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                      <a href="#" style="font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
+                      <a href="#" style="font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+                  </div>
+              </div>
+          </div>
+          <div class="footer-bottom">
+              <p>&copy; Medcare Center. All rights reserved. | Excellence in Healthcare Since 1985</p>
+          </div>
+      </div>
+  </footer>
+
+</body>
+</html>

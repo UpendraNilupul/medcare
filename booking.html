@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book an Appointment</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <div class="top-header">
+    <div class="container">
+      <div class="contact-info">
+        <span><i class="fas fa-phone"></i> +94 11 5 777 777</span>
+        <span><i class="fas fa-envelope"></i> info@medicare.com</span>
+      </div>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Header / Navbar -->
+  <header class="main-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-heartbeat"></i>
+        <span>medcare</span>
+      </a>
+      <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="service.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="doctors.html">Doctors</a>
+        <a href="ContactUs.html">Contact</a>
+      </nav>
+      <a href="booking.html" class="appointment-btn">
+        <i class="fas fa-calendar-check"></i>
+        Book Appointment
+      </a>
+    </div>
+  </header>
+
+  <!-- Booking Form -->
+  <section class="main-flex-container">
+    <div class="symptom-box">
+      <h1>Describe Your Symptoms</h1>
+      <p>Select common symptoms or describe your issue below.</p>
+      <div class="symptom-tags">
+        <button>Fever</button>
+        <button>Cough</button>
+        <button>Headache</button>
+        <button>Back Pain</button>
+        <button>Allergy</button>
+        <button>Cold</button>
+        <button>Chest Pain</button>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Type your symptoms..."/>
+      </div>
+      <img src="image/body.png" alt="Diagram of a human body with highlighted areas for symptom selection, neutral tone, white background" class="body-diagram" />
+    </div>
+
+    <!-- Right: Form Box -->
+    <div class="doctor-search-box">
+      <h2>Book an Appointment</h2>
+      <form id="bookingForm">
+        <input type="text" name="name" placeholder="Name" required/>
+        <input type="email" name="email" placeholder="Email" required/>
+        <input type="tel" name="phone" placeholder="Phone Number" required/>
+        <input type="date" name="date" placeholder="Appointment Date" required/>
+        
+        
+        
+
+        <label for="department">Select Specialties <span style="color: red;">*</span></label>
+        <select id="department" name="department" required>
+    <option value="">Select Specialties</option>
+    <option value="cardiology">Cardiology</option>
+    <option value="pediatrics">Pediatrics</option>
+    <option value="orthopedics">Orthopedics</option>
+    <option value="neurology">Neurology</option>
+    <option value="consultant">Consultant Cardiologist</option>
+    <option value="surgeon">Surgeon</option>
+    <option value="dermatology">Dermatology</option>
+    <option value="gynecology">Gynecologist & Obstetrician</option>
+          <option value="psychiatry">Psychiatrist</option>
+        </select>
+
+        <label for="doctor">Preferred Doctor <span style="color: red;">*</span></label>
+        <select id="doctor" name="doctor" required>
+          <option value="">Preferred Doctor</option>
+        </select>
+        <input type="hidden" id="doctor_id" name="doctor_id" value="">
+
+        <label for="time">Preferred Time <span style="color: red;">*</span></label>
+        <select id="time" name="time" required>
+          <option value="">Select Time</option>
+          <option value="9AM-12PM">9:00 AM - 12:00 PM</option>
+          <option value="5PM-9PM">5:00 PM - 9:00 PM</option>
+        </select>
+        <small id="timeHelp" style="color: #666; font-size: 0.9em; display: none;"></small>
+
+  <script>
+    const doctorsByDepartment = {
+      cardiology: [
+        { name: "Dr.Nuwan Perera", value: "dr_smith", id: 1 },
+        { name: "Dr.David Carter", value: "dr_david", id: 2 }
+      ],
+      pediatrics: [
+        { name: "Dr.Ishara Jayasinghe", value: "dr_jones", id: 3 },
+        { name: "Dr.Harini Wijesinghe", value: "dr_harini", id: 4 }
+      ],
+      orthopedics: [
+        { name: "Dr.Chaminda de Silva", value: "dr_chaminda", id: 5 },
+        { name: "Dr.Pradeepan Selvakumar", value: "dr_pradeepan", id: 6 }
+      ],
+      neurology: [
+        { name: "Dr.Malith Fernando", value: "dr_kumar", id: 7 },
+        { name: "Dr.Navin Yogeswaran", value: "dr_navin", id: 8 }
+      ],
+      consultant: [
+        { name: "Dr.Nuwan Perera", value: "dr_smith", id: 1 },
+        { name: "Dr.Sanduni Karunarathne", value: "dr_sanduni", id: 9 }
+      ],
+      surgeon: [
+        { name: "Dr.Chaminda de Silva", value: "dr_chaminda", id: 5 },
+        { name: "Dr.Aravind Rajkumar", value: "dr_aravind", id: 10 }
+      ],
+      dermatology: [
+        { name: "Dr.Ishara Jayasinghe", value: "dr_jones", id: 3 },
+        { name: "Dr.Harini Wijesinghe", value: "dr_harini", id: 4 }
+      ],
+      gynecology: [
+        { name: "Dr.Sanduni Karunarathne", value: "dr_sanduni", id: 9 },
+        { name: "Dr.Harini Wijesinghe", value: "dr_harini", id: 4 }
+      ],
+      psychiatry: [
+        { name: "Dr.David Carter", value: "dr_david", id: 2 },
+        { name: "Dr.Navin Yogeswaran", value: "dr_navin", id: 8 }
+      ]
+    };
+
+    const departmentSelect = document.getElementById('department');
+    const doctorSelect = document.getElementById('doctor');
+    const doctorIdField = document.getElementById('doctor_id');
+    const timeSelect = document.getElementById('time');
+    const timeHelp = document.getElementById('timeHelp');
+    const dateInput = document.querySelector('input[name="date"]');
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Update doctor dropdown when department changes
+    departmentSelect.addEventListener('change', () => {
+      const selectedDept = departmentSelect.value;
+      const doctors = doctorsByDepartment[selectedDept] || [];
+
+      // Shuffle the doctors list
+      shuffle(doctors);
+
+      // Clear previous options
+      doctorSelect.innerHTML = '<option value="">Preferred Doctor</option>';
+      doctorIdField.value = '';
+      
+      // Reset time selection
+      resetTimeSlots();
+
+      // Add new options
+      doctors.forEach(doc => {
+        const option = document.createElement('option');
+        option.value = doc.value;
+        option.textContent = doc.name;
+        option.dataset.doctorId = doc.id;
+        doctorSelect.appendChild(option);
+      });
+    });
+
+    // Update available times when doctor changes
+    doctorSelect.addEventListener('change', () => {
+      const selectedOption = doctorSelect.options[doctorSelect.selectedIndex];
+      const doctorId = selectedOption.dataset.doctorId;
+      
+      if (doctorId) {
+        doctorIdField.value = doctorId;
+        loadDoctorAvailability(doctorId);
+      } else {
+        doctorIdField.value = '';
+        resetTimeSlots();
+      }
+    });
+
+    // Update available times when date changes (for booked slot checking)
+    dateInput.addEventListener('change', () => {
+      const doctorId = doctorIdField.value;
+      if (doctorId) {
+        loadDoctorAvailability(doctorId);
+      }
+    });
+
+    // Function to load doctor availability
+    async function loadDoctorAvailability(doctorId) {
+      try {
+        const selectedDate = dateInput.value;
+        const url = `Backend/get_doctor_availability.php?doctor_id=${doctorId}${selectedDate ? `&date=${selectedDate}` : ''}`;
+        
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data.success) {
+          updateTimeSlots(data.available_slots);
+          timeHelp.textContent = `Available times for ${data.doctor_name}`;
+          timeHelp.style.display = 'block';
+        } else {
+          console.error('Error loading doctor availability:', data.message);
+          resetTimeSlots();
+        }
+      } catch (error) {
+        console.error('Error fetching doctor availability:', error);
+        resetTimeSlots();
+      }
+    }
+
+    // Function to update time slots based on doctor availability
+    function updateTimeSlots(availableSlots) {
+      timeSelect.innerHTML = '<option value="">Select Time</option>';
+      
+      if (availableSlots && availableSlots.length > 0) {
+        availableSlots.forEach(slot => {
+          const option = document.createElement('option');
+          option.value = slot.value;
+          option.textContent = slot.label;
+          timeSelect.appendChild(option);
+        });
+      } else {
+        // If no specific slots returned, show default slots
+        resetTimeSlots();
+      }
+    }
+
+    // Function to reset time slots to default
+    function resetTimeSlots() {
+      timeSelect.innerHTML = '<option value="">Select Time</option>';
+      const defaultSlots = [
+        { value: '9AM-12PM', label: '9:00 AM - 12:00 PM' },
+        { value: '5PM-9PM', label: '5:00 PM - 9:00 PM' }
+      ];
+      
+      defaultSlots.forEach(slot => {
+        const option = document.createElement('option');
+        option.value = slot.value;
+        option.textContent = slot.label;
+        timeSelect.appendChild(option);
+      });
+      
+      timeHelp.style.display = 'none';
+    }
+
+    // Set minimum date to today (dateInput already declared above)
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+
+    // Form validation function
+    function validateForm() {
+      const name = document.querySelector('input[name="name"]').value.trim();
+      const email = document.querySelector('input[name="email"]').value.trim();
+      const phone = document.querySelector('input[name="phone"]').value.trim();
+      const date = document.querySelector('input[name="date"]').value;
+      const time = document.getElementById('time').value;
+      const department = document.getElementById('department').value;
+      const doctor = document.getElementById('doctor').value;
+      
+      let errors = [];
+      
+      if (!name) errors.push('Please enter your name');
+      if (!email) errors.push('Please enter your email');
+      if (!phone) errors.push('Please enter your phone number');
+      if (!date) errors.push('Please select an appointment date');
+      if (!time) errors.push('Please select a preferred time slot');
+      if (!department) errors.push('Please select a medical specialty');
+      if (!doctor) errors.push('Please select a preferred doctor');
+      
+      if (errors.length > 0) {
+        const errorMessage = document.getElementById('errorMessage');
+        const messageContainer = document.getElementById('messageContainer');
+        
+        errorMessage.innerHTML = '<strong>Please complete the following:</strong><br>' + errors.join('<br>');
+        errorMessage.style.display = 'block';
+        messageContainer.style.display = 'block';
+        
+        // Scroll to error message
+        errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return false;
+      }
+      
+      return true;
+    }
+
+    // Form submission handling
+    document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+      e.preventDefault(); // Prevent default form submission
+      
+      // Client-side validation
+      if (!validateForm()) {
+        return;
+      }
+      
+      const submitBtn = document.getElementById('submitBtn');
+      const originalText = submitBtn.innerHTML;
+      const messageContainer = document.getElementById('messageContainer');
+      const successMessage = document.getElementById('successMessage');
+      const errorMessage = document.getElementById('errorMessage');
+      
+      // Hide previous messages
+      messageContainer.style.display = 'none';
+      successMessage.style.display = 'none';
+      errorMessage.style.display = 'none';
+      
+      // Show loading state
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i>Booking...';
+      submitBtn.disabled = true;
+      
+      try {
+        // Get form data
+        const formData = new FormData(this);
+        
+        // Validate date is not in the past
+        const selectedDate = new Date(formData.get('date'));
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        if (selectedDate < today) {
+          throw new Error('Please select a future date for your appointment');
+        }
+        
+        // Send data to PHP backend
+        const response = await fetch('Backend/book_appointment.php', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          // Show success message with receipt download option
+          successMessage.innerHTML = `
+            <strong>Success!</strong> ${result.message}<br>
+            <strong>Appointment Details:</strong><br>
+            Name: ${result.details.name}<br>
+            Date: ${result.details.date}<br>
+            Time: ${result.details.time}<br>
+            Doctor: ${result.details.doctor}<br>
+            Specialty: ${result.details.specialty}<br>
+            <strong>Charges:</strong><br>
+            Consultation Fee: LKR ${result.details.consultation_fee ? Number(result.details.consultation_fee).toLocaleString('en-US', {minimumFractionDigits: 2}) : '3,500.00'}<br>
+            Service Charge: LKR ${result.details.service_charge ? Number(result.details.service_charge).toLocaleString('en-US', {minimumFractionDigits: 2}) : '500.00'}<br>
+            <strong>Total Amount: LKR ${result.details.total_amount ? Number(result.details.total_amount).toLocaleString('en-US', {minimumFractionDigits: 2}) : '4,000.00'}</strong><br><br>
+            
+            <div style="margin-top: 15px;">
+              
+              <button onclick="viewReceipt(${result.appointment_id})" 
+                      style="background: #28a745; color: white; border: none; padding: 10px 20px; 
+                             border-radius: 5px; cursor: pointer; font-size: 14px;">
+                👁️ View Receipt
+              </button>
+            </div>
+          `;
+          successMessage.style.display = 'block';
+          messageContainer.style.display = 'block';
+          
+          // Reset form
+          this.reset();
+          
+          // Reset doctor dropdown
+          document.getElementById('doctor').innerHTML = '<option value="">Preferred Doctor</option>';
+          
+        } else {
+          // Show error message
+          let errorText = result.message || 'An error occurred while booking your appointment.';
+          
+          if (result.errors && result.errors.length > 0) {
+            errorText = '<strong>Please fix the following errors:</strong><br>' + result.errors.join('<br>');
+          }
+          
+          errorMessage.innerHTML = errorText;
+          errorMessage.style.display = 'block';
+          messageContainer.style.display = 'block';
+        }
+        
+      } catch (error) {
+        console.error('Error:', error);
+        errorMessage.innerHTML = '<strong>Error:</strong> ' + error.message;
+        errorMessage.style.display = 'block';
+        messageContainer.style.display = 'block';
+      } finally {
+        // Restore button state
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+        
+       
+        <br>
+        <button type="submit" id="submitBtn" style="background: linear-gradient(90deg, #28a745 0%, #43e97b 100%); color: #fff; border: none; padding: 0.75rem 2rem; border-radius: 30px; font-size: 1.1rem; font-weight: 600; box-shadow: 0 4px 14px rgba(40,167,69,0.15); cursor: pointer; transition: background 0.3s, transform 0.2s;">
+          <i class="fas fa-check-circle" style="margin-right: 8px;"></i>
+          Submit Appointment
+        </button>
+      </form>
+      
+      <!-- Success/Error Messages -->
+      <div id="messageContainer" style="margin-top: 1rem; display: none;">
+        <div id="successMessage" style="background: #d4edda; color: #155724; padding: 1rem; border-radius: 5px; border: 1px solid #c3e6cb; display: none;"></div>
+        <div id="errorMessage" style="background: #f8d7da; color: #721c24; padding: 1rem; border-radius: 5px; border: 1px solid #f5c6cb; display: none;"></div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#home">Home</a>
+                    <a href="#services">Services</a>
+                    <a href="#about">About Us</a>
+                    <a href="#doctors">Doctors</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <a href="#">Emergency Care</a>
+                    <a href="#">Cardiology</a>
+                    <a href="#">Oncology</a>
+                    <a href="#">Surgery</a>
+                    <a href="#">Diagnostics</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <a href="tel:+94115777777"><i class="fas fa-phone"></i> +94 11 5 777 777</a>
+                    <a href="mailto:info@nawaloka.com"><i class="fas fa-envelope"></i> info@medicare.com</a>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i> 23, Deshamanya H.K. Dharmadasa Mawatha, Colombo</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <a href="#" style="font-size: 1.5rem;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
+                        <a href="#" style="font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Medcare Center. All rights reserved. | Excellence in Healthcare Since 1985</p>
+            </div>
+        
+		
+		
+		
+		
+		
+		
+		
+		
+		
+        </div>
+    </footer>
+
+    <!-- Receipt Download Functions -->
+    <script>
+        function downloadReceipt(appointmentId) {
+            if (!appointmentId) {
+                alert('Appointment ID not found. Please try again.');
+                return;
+            }
+            
+            // Create a temporary link to download the receipt
+            const link = document.createElement('a');
+            link.href = `Backend/generate_receipt.php?appointment_id=${appointmentId}`;
+            link.target = '_blank';
+            link.download = `appointment_receipt_${appointmentId}.html`;
+            
+            // Trigger the download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        function viewReceipt(appointmentId) {
+            if (!appointmentId) {
+                alert('Appointment ID not found. Please try again.');
+                return;
+            }
+            
+            // Open receipt in a new window/tab
+            const receiptWindow = window.open(
+                `Backend/generate_receipt.php?appointment_id=${appointmentId}`,
+                '_blank',
+                'width=800,height=900,scrollbars=yes,resizable=yes'
+            );
+            
+            if (!receiptWindow) {
+                alert('Please allow popups to view the receipt, or try downloading it instead.');
+            }
+        }
+    </script>
+
+</body>
+</html>
