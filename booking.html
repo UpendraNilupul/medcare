@@ -75,51 +75,116 @@
         
         <input type="email" name="email" placeholder="Email" required/>
         <input type="tel" name="phone" placeholder="Phone Number" required/>
-        <select name="department" id="department-select" required></select>
-          <option value="">Select Department</option>
-          <option value="consultant">Consultant Cardiologist</option>
-          <option value="pediatrics">Pediatrics</option>
-          <option value="surgery">Surgery</option>
-          <option value="dermatology">Dermatology</option>
-          <option value="gynecology">Gynecologist & Obstetrician</option>
-          <option value="orthopedics">Orthopedics</option>
-          <option value="cardiology">Cardiology</option>
-          <option value="psychiatry">Psychiatrist</option>
+        <input type="date" name="dob" placeholder="Date of Birth" required/>
+        <label for="time">Prefered Time</label>
+        <select id="time" name="time">
+          <option value="">Select Time</option>
+          <option value="10-12PM">10-12PM</option>
+          <option value="12-2PM">12-2PM</option>
+          <option value="2-5PM">2-5PM</option>
         </select>
-        <select name="doctor" id="doctor-select" required></select>
-          <option value="">Preferred Doctor</option>
-        </select>
-        <script>
-        const doctorsByDept = {
-          consultant: [{value: "dr_nuwan", label: "Dr.Nuwan Perera"}],
-          pediatrics: [{value: "dr_ishara", label: "Dr.Ishara Jayasinghe"}],
-          surgery: [{value: "dr_malith", label: "Dr.Malith Fernando"}],
-          dermatology: [{value: "dr_sanduni", label: "Dr.Sanduni Karunarathne"}],
-          gynecology: [{value: "dr_harini", label: "Dr.Harini Wijesinghe"}],
-          orthopedics: [{value: "dr_chaminda", label: "Dr.Chaminda de Silva"}],
-          cardiology: [{value: "dr_aravind", label: "Dr.Aravind Rajkumar"}],
-          psychiatry: [{value: "dr_pradeepan", label: "Dr.Pradeepan Selvakumar"}]
-        };
+        
 
-        document.getElementById('department-select').addEventListener('change', function() {
-          const dept = this.value;
-          const doctorSelect = document.getElementById('doctor-select');
-          doctorSelect.innerHTML = '<option value="">Preferred Doctor</option>';
-          if (doctorsByDept[dept]) {
-            doctorsByDept[dept].forEach(doc => {
-              const opt = document.createElement('option');
-              opt.value = doc.value;
-              opt.textContent = doc.label;
-              doctorSelect.appendChild(opt);
-            });
-          }
-        });
-        </script>
-        <input type="date" name="date" required/>
+  
+
+
+  <label for="department">Select Department:</label>
+  <select id="department" name="department">
+    <option value="">Select Department</option>
+    <option value="cardiology">Cardiology</option>
+    <option value="pediatrics">Pediatrics</option>
+    <option value="orthopedics">Orthopedics</option>
+    <option value="neurology">Neurology</option>
+    <option value="consultant">Consultant Cardiologist</option>
+    <option value="surgeon">Surgeon</option>
+    <option value="dermatology">Dermatology</option>
+    <option value="gynecology">Gynecologist & Obstetrician</option>
+    <option value="psychiatry">Psychiatrist</option>
+  </select>
+ 
+ 
+
+  <label for="doctor">Preferred Doctor:</label>
+  <select id="doctor" name="doctor">
+    <option value="">Preferred Doctor</option>
+  </select>
+
+  <script>
+    const doctorsByDepartment = {
+      cardiology: [
+        { name: "Dr.Nuwan Perera", value: "dr_smith" },
+        { name: "Dr.David Carter", value: "dr_david" }
+      ],
+      pediatrics: [
+        { name: "Dr.Ishara Jayasinghe", value: "dr_jones" },
+        { name: "Dr.Harini Wijesinghe", value: "dr_harini" }
+      ],
+      orthopedics: [
+        { name: "Dr.Chaminda de Silva", value: "dr_chaminda" },
+        { name: "Dr.Pradeepan Selvakumar", value: "dr_pradeepan" }
+      ],
+      neurology: [
+        { name: "Dr.Malith Fernando", value: "dr_kumar" },
+        { name: "Dr.Navin Yogeswaran", value: "dr_navin" }
+      ],
+      consultant: [
+        { name: "Dr.Nuwan Perera", value: "dr_smith" },
+        { name: "Dr.Sanduni Karunarathne", value: "dr_sanduni" }
+      ],
+      surgeon: [
+        { name: "Dr.Chaminda de Silva", value: "dr_chaminda" },
+        { name: "Dr.Aravind Rajkumar", value: "dr_aravind" }
+      ],
+      dermatology: [
+        { name: "Dr.Ishara Jayasinghe", value: "dr_jones" },
+        { name: "Dr.Harini Wijesinghe", value: "dr_harini" }
+      ],
+      gynecology: [
+        { name: "Dr.Sanduni Karunarathne", value: "dr_sanduni" },
+        { name: "Dr.Harini Wijesinghe", value: "dr_harini" }
+      ],
+      psychiatry: [
+        { name: "Dr.David Carter", value: "dr_david" },
+        { name: "Dr.Navin Yogeswaran", value: "dr_navin" }
+      ]
+    };
+
+    const departmentSelect = document.getElementById('department');
+    const doctorSelect = document.getElementById('doctor');
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    departmentSelect.addEventListener('change', () => {
+      const selectedDept = departmentSelect.value;
+      const doctors = doctorsByDepartment[selectedDept] || [];
+
+      // Shuffle the doctors list
+      shuffle(doctors);
+
+      // Clear previous options
+      doctorSelect.innerHTML = '<option value="">Preferred Doctor</option>';
+
+      // Add new options
+      doctors.forEach(doc => {
+        const option = document.createElement('option');
+        option.value = doc.value;
+        option.textContent = doc.name;
+        doctorSelect.appendChild(option);
+      });
+    });
+  </script>
+        
        
         <br>
-        <button type="submit" class="styled-btn" style="background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%); color: #fff; border: none; border-radius: 30px; padding: 0.8em 2.5em; font-size: 1.1em; font-weight: 600; box-shadow: 0 4px 16px rgba(67,233,123,0.15); cursor: pointer; transition: background 0.3s, transform 0.2s;">
-          <i class="fas fa-paper-plane" style="margin-right: 0.5em;"></i> Submit Appointment
+        <button type="submit" style="background: linear-gradient(90deg, #28a745 0%, #43e97b 100%); color: #fff; border: none; padding: 0.75rem 2rem; border-radius: 30px; font-size: 1.1rem; font-weight: 600; box-shadow: 0 4px 14px rgba(40,167,69,0.15); cursor: pointer; transition: background 0.3s, transform 0.2s;">
+          <i class="fas fa-check-circle" style="margin-right: 8px;"></i>
+          Submit Appointment
         </button>
       </form>
     </div>
