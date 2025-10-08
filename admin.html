@@ -1629,8 +1629,81 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }
 
+    // Fetch appointments from PHP backend
+    function fetchAppointments() {
+        fetch("Backend/get_appointments.php")
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log("Appointments data loaded:", data);
+                    populateAppointmentsTable(data.appointments);
+                    updateAppointmentStats(data.statistics);
+                } else {
+                    console.error("Error fetching appointments:", data.message);
+                    alert("Failed to load appointments: " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Fetch error:", error);
+                alert("Failed to connect to server. Make sure PHP server is running on localhost:8000");
+            });
+    }
+
+    // Populate appointments table dynamically
+    function populateAppointmentsTable(appointments) {
+        const tbody = document.getElementById("appointmentsTableBody");
+        tbody.innerHTML = "";
+
+        if (appointments.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 20px;">No appointments found</td></tr>';
+            return;
+        }
+
+        appointments.forEach(appointment => {
+            const statusClass = appointment.status === 'Upcoming' ? 'status-confirmed' : 'status-pending';
+            const row = `
+                <tr>
+                    <td>${appointment.id}</td>
+                    <td>${appointment.patient}</td>
+                    <td>${appointment.doctor}</td>
+                    <td>${appointment.date}</td>
+                    <td>${appointment.time}</td>
+                    <td>${appointment.specialty}</td>
+                    <td><span class="status-badge ${statusClass}">${appointment.status}</span></td>
+                    <td class="action-buttons">
+                        <button class="action-btn edit" onclick="viewAppointment(${appointment.id})">View</button>
+                        <button class="action-btn delete" onclick="cancelAppointment(${appointment.id})">Cancel</button>
+                    </td>
+                </tr>
+            `;
+            tbody.innerHTML += row;
+        });
+    }
+
+    // Update appointment statistics
+    function updateAppointmentStats(stats) {
+        document.getElementById('totalAppointments').textContent = stats.total || 0;
+    }
+
+    // Appointment action functions
+    function viewAppointment(id) {
+        alert(`Viewing appointment details for ID: ${id}`);
+        // You can implement a detailed view modal here
+    }
+
+    function cancelAppointment(id) {
+        if (confirm('Are you sure you want to cancel this appointment?')) {
+            // You can implement appointment cancellation here
+            alert(`Appointment ${id} would be cancelled (feature not implemented yet)`);
+        }
+    }
+
     // Call on page load
-    document.addEventListener("DOMContentLoaded", fetchUsers);
+    document.addEventListener("DOMContentLoaded", function() {
+        fetchUsers();
+        fetchDoctors();
+        fetchAppointments();
+    });
   </script>
 
 </body>

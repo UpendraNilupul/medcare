@@ -148,6 +148,22 @@ body {
   border: 1px solid #ccc;
 }
 
+/* Body Diagram Image */
+.body-diagram {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  display: block;
+  margin: 2rem auto;
+  background: transparent;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.body-diagram:hover {
+  transform: scale(1.02);
+}
+
 /* Booking Form */
 .doctor-search-box {
   flex: 1;
@@ -903,4 +919,63 @@ form input[type="submit"]:hover,
 .login-btn:hover {
     background: var(--primary-color);
     color: red;
+}
+
+/* Responsive Design for Booking Page */
+@media (max-width: 768px) {
+    .main-flex-container {
+        flex-direction: column;
+        padding: 20px 5%;
+        gap: 20px;
+    }
+    
+    .symptom-box,
+    .doctor-search-box {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .main-header .container {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    .nav-menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    .body-diagram {
+        max-width: 350px;
+        margin: 1.8rem auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-flex-container {
+        padding: 15px 3%;
+        gap: 15px;
+    }
+    
+    .symptom-box,
+    .doctor-search-box {
+        padding: 20px;
+    }
+    
+    .symptom-tags {
+        gap: 5px;
+    }
+    
+    .symptom-tags button {
+        padding: 4px 8px;
+        font-size: 0.9rem;
+    }
+    
+    .body-diagram {
+        max-width: 300px;
+        margin: 1.5rem auto;
+    }
 }
