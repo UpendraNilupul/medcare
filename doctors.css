@@ -115,6 +115,21 @@
             color: var(--green);
         }
 
+        .appointment-btn {
+            background: var(--accent-green);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .appointment-btn:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
             70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
