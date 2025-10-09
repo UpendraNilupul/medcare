@@ -345,6 +345,11 @@
             color: #065f46;
         }
 
+        .status-cancelled {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
         .action-buttons {
           display: flex;
             gap: 0.5rem;
@@ -756,7 +761,16 @@
                         </div>
                         <h3>Appointments</h3>
                         <div class="stat-number" id="totalAppointments">45</div>
-                        <p>This Month</p>
+                        <p>Total</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-times"></i>
+                        </div>
+                        <h3>Cancelled</h3>
+                        <div class="stat-number" id="cancelledAppointments">0</div>
+                        <p>Appointments</p>
                     </div>
                 </div>
 
@@ -869,10 +883,21 @@
 
                 <!-- Appointments Section -->
                 <div class="table-section" id="appointments">
-                    <h3>
-                        <i class="fas fa-calendar-check"></i>
-                        Appointment Management
-                    </h3>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3>
+                            <i class="fas fa-calendar-check"></i>
+                            Appointment Management
+                        </h3>
+                        <div class="filter-container">
+                            <label for="statusFilter" style="margin-right: 0.5rem; font-weight: 600;">Filter by Status:</label>
+                            <select id="statusFilter" onchange="filterAppointments()" style="padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.375rem; background: white;">
+                                <option value="all">All Appointments</option>
+                                <option value="Upcoming">Upcoming</option>
+                                <option value="Past">Past</option>
+                                <option value="Cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                    </div>
                     <div style="overflow-x: auto;">
                         <table class="data-table" id="appointmentsTable">
                             <thead>
@@ -1636,6 +1661,8 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(data => {
                 if (data.success) {
                     console.log("Appointments data loaded:", data);
+                    // Store appointments globally for access by other functions
+                    window.currentAppointments = data.appointments;
                     populateAppointmentsTable(data.appointments);
                     updateAppointmentStats(data.statistics);
                 } else {
@@ -1660,9 +1687,44 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         appointments.forEach(appointment => {
-            const statusClass = appointment.status === 'Upcoming' ? 'status-confirmed' : 'status-pending';
+            let statusClass = 'status-pending';
+            let actionButtons = '';
+            
+            // Determine status class
+            switch(appointment.status) {
+                case 'Upcoming':
+                    statusClass = 'status-confirmed';
+                    break;
+                case 'Past':
+                    statusClass = 'status-completed';
+                    break;
+                case 'Cancelled':
+                    statusClass = 'status-cancelled';
+                    break;
+                default:
+                    statusClass = 'status-pending';
+            }
+            
+            // Determine action buttons based on status
+            if (appointment.status === 'Cancelled') {
+                actionButtons = `
+                    <button class="action-btn edit" onclick="viewAppointment(${appointment.id}, 'cancelled')" title="View cancellation details">View Details</button>
+                    <button class="action-btn" style="background: #6b7280; opacity: 0.5; cursor: not-allowed;" disabled>Already Cancelled</button>
+                `;
+            } else if (appointment.status === 'Past') {
+                actionButtons = `
+                    <button class="action-btn edit" onclick="viewAppointment(${appointment.id}, 'past')">View</button>
+                    <button class="action-btn delete" onclick="cancelAppointment(${appointment.id}, '${appointment.patient}')">Cancel</button>
+                `;
+            } else {
+                actionButtons = `
+                    <button class="action-btn edit" onclick="viewAppointment(${appointment.id}, 'upcoming')">View</button>
+                    <button class="action-btn delete" onclick="cancelAppointment(${appointment.id}, '${appointment.patient}')">Cancel</button>
+                `;
+            }
+            
             const row = `
-                <tr>
+                <tr data-appointment-id="${appointment.id}">
                     <td>${appointment.id}</td>
                     <td>${appointment.patient}</td>
                     <td>${appointment.doctor}</td>
@@ -1671,8 +1733,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <td>${appointment.specialty}</td>
                     <td><span class="status-badge ${statusClass}">${appointment.status}</span></td>
                     <td class="action-buttons">
-                        <button class="action-btn edit" onclick="viewAppointment(${appointment.id})">View</button>
-                        <button class="action-btn delete" onclick="cancelAppointment(${appointment.id})">Cancel</button>
+                        ${actionButtons}
                     </td>
                 </tr>
             `;
@@ -1683,19 +1744,135 @@ document.addEventListener("DOMContentLoaded", function() {
     // Update appointment statistics
     function updateAppointmentStats(stats) {
         document.getElementById('totalAppointments').textContent = stats.total || 0;
+        document.getElementById('cancelledAppointments').textContent = stats.cancelled || 0;
     }
 
     // Appointment action functions
-    function viewAppointment(id) {
-        alert(`Viewing appointment details for ID: ${id}`);
-        // You can implement a detailed view modal here
+    function viewAppointment(id, type = 'general') {
+        // Find the appointment data from the current loaded appointments
+        const currentAppointments = window.currentAppointments || [];
+        const appointment = currentAppointments.find(apt => apt.id == id);
+        
+        if (!appointment) {
+            alert(`Appointment details not found`);
+            return;
+        }
+        
+        let message = `Appointment Details:\n\n`;
+        message += `ID: ${appointment.id}\n`;
+        message += `Patient: ${appointment.patient}\n`;
+        message += `Email: ${appointment.email}\n`;
+        message += `Doctor: ${appointment.doctor}\n`;
+        message += `Date: ${appointment.date}\n`;
+        message += `Time: ${appointment.time}\n`;
+        message += `Specialty: ${appointment.specialty}\n`;
+        message += `Status: ${appointment.status}\n`;
+        message += `Created: ${appointment.created}\n`;
+        
+        if (type === 'cancelled' && appointment.cancellation_reason) {
+            message += `\nCancellation Reason: ${appointment.cancellation_reason}\n`;
+            if (appointment.cancelled_at) {
+                message += `Cancelled At: ${appointment.cancelled_at}\n`;
+            }
+        }
+        
+        alert(message);
     }
 
-    function cancelAppointment(id) {
-        if (confirm('Are you sure you want to cancel this appointment?')) {
-            // You can implement appointment cancellation here
-            alert(`Appointment ${id} would be cancelled (feature not implemented yet)`);
+    function cancelAppointment(id, patientName) {
+        // Check if appointment is already cancelled
+        const currentAppointments = window.currentAppointments || [];
+        const appointment = currentAppointments.find(apt => apt.id == id);
+        
+        if (appointment && appointment.status === 'Cancelled') {
+            alert('This appointment is already cancelled.');
+            return;
         }
+        
+        const reason = prompt(`Please enter the reason for cancelling ${patientName}'s appointment:`, '');
+        
+        if (reason === null) {
+            // User clicked cancel
+            return;
+        }
+        
+        if (reason.trim() === '') {
+            alert('Please provide a reason for cancellation.');
+            return;
+        }
+        
+        if (confirm(`Are you sure you want to cancel ${patientName}'s appointment?\n\nReason: ${reason}`)) {
+            // Show loading state
+            const buttons = document.querySelectorAll(`tr[data-appointment-id="${id}"] .action-btn`);
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                if (btn.textContent === 'Cancel') {
+                    btn.textContent = 'Cancelling...';
+                }
+            });
+            
+            // Send cancellation request to backend
+            fetch('Backend/cancel_appointment.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    appointment_id: id,
+                    reason: reason.trim()
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(`Appointment cancelled successfully!\n\nPatient: ${data.patient_name}\nCancelled at: ${data.cancelled_at}`);
+                    
+                    // Refresh the appointments table
+                    fetchAppointments();
+                } else {
+                    alert(`Failed to cancel appointment: ${data.message}`);
+                    
+                    // Restore button states
+                    buttons.forEach(btn => {
+                        btn.disabled = false;
+                        if (btn.textContent === 'Cancelling...') {
+                            btn.textContent = 'Cancel';
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error cancelling appointment:', error);
+                alert('An error occurred while cancelling the appointment. Please try again.');
+                
+                // Restore button states
+                buttons.forEach(btn => {
+                    btn.disabled = false;
+                    if (btn.textContent === 'Cancelling...') {
+                        btn.textContent = 'Cancel';
+                    }
+                });
+            });
+        }
+    }
+
+    // Filter appointments by status
+    function filterAppointments() {
+        const filterValue = document.getElementById('statusFilter').value;
+        
+        if (!window.currentAppointments) {
+            return;
+        }
+        
+        let filteredAppointments = window.currentAppointments;
+        
+        if (filterValue !== 'all') {
+            filteredAppointments = window.currentAppointments.filter(appointment => 
+                appointment.status === filterValue
+            );
+        }
+        
+        populateAppointmentsTable(filteredAppointments);
     }
 
     // Call on page load

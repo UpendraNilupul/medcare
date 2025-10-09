@@ -17,7 +17,10 @@ try {
                 appointment_time,
                 specialty,
                 doctor_name,
-                created_at
+                created_at,
+                status,
+                cancellation_reason,
+                cancelled_at
             FROM appointments 
             ORDER BY appointment_date DESC, appointment_time ASC";
     
@@ -29,6 +32,14 @@ try {
     
     $appointments = [];
     while ($row = $result->fetch_assoc()) {
+        // Determine status
+        $dbStatus = $row['status'] ?: 'confirmed';
+        if ($dbStatus === 'cancelled') {
+            $displayStatus = 'Cancelled';
+        } else {
+            $displayStatus = strtotime($row['appointment_date'] . ' ' . $row['appointment_time']) > time() ? 'Upcoming' : 'Past';
+        }
+        
         // Format the data for display
         $appointments[] = [
             'id' => $row['appointment_id'],
@@ -39,7 +50,10 @@ try {
             'specialty' => ucfirst($row['specialty']),
             'doctor' => $row['doctor_name'],
             'created' => date('M d, Y g:i A', strtotime($row['created_at'])),
-            'status' => strtotime($row['appointment_date'] . ' ' . $row['appointment_time']) > time() ? 'Upcoming' : 'Past'
+            'status' => $displayStatus,
+            'db_status' => $dbStatus,
+            'cancellation_reason' => $row['cancellation_reason'],
+            'cancelled_at' => $row['cancelled_at'] ? date('M d, Y g:i A', strtotime($row['cancelled_at'])) : null
         ];
     }
     
@@ -48,8 +62,11 @@ try {
     $upcomingCount = count(array_filter($appointments, function($apt) {
         return $apt['status'] === 'Upcoming';
     }));
+    $cancelledCount = count(array_filter($appointments, function($apt) {
+        return $apt['status'] === 'Cancelled';
+    }));
     $todayCount = count(array_filter($appointments, function($apt) {
-        return strpos($apt['date'], date('M d, Y')) !== false;
+        return strpos($apt['date'], date('M d, Y')) !== false && $apt['status'] !== 'Cancelled';
     }));
     
     echo json_encode([
@@ -58,6 +75,7 @@ try {
         'statistics' => [
             'total' => $totalCount,
             'upcoming' => $upcomingCount, 
+            'cancelled' => $cancelledCount,
             'today' => $todayCount
         ]
     ]);
